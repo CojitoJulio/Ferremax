@@ -1,0 +1,19 @@
+#root {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+  
+#main {
+    width: auto;
+    max-width: 85%;
+    margin: 0 auto;
+}
+  
+#productos {
+    width: 100%;
+}
+
+#productos td {
+    border: 1px solid green;
+}
