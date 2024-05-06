@@ -11,7 +11,7 @@ const dbOptions = {
     host: 'localhost',
     prot: 3306,
     user: 'root',
-    password: 'Dani1915#',
+    password: 'palomamami',
     database: 'ferremas_db'
 }
 
@@ -25,7 +25,7 @@ app.use(cors())
 
 
 app.get('/', (req, res) => {
-    res.json({ message: 'hola mundo'})
+    res.json({ message: 'hola mundo' })
 })
 
 app.use('/api', routes);
@@ -33,5 +33,5 @@ app.use('/api', routes);
 // Server Running
 
 app.listen((PORT), () => {
-    console.log('server is listening on port http://localhost:'+ PORT)
+    console.log('server is listening on port http://localhost:' + PORT)
 })

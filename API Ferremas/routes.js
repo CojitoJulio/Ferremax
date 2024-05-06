@@ -21,33 +21,32 @@ routes.post('/agregar', (req, res) => {
     req.getConnection((err, conn) => {
         if (err) return res.send(err)
 
-        // conn.query(
-        //     `INSERT INTO productos(codigo, subcat, marca, nombre, precio)
-        //     values (?, ?, ?, ?, ?)`, 
-        //     [req.body.codigo, req.body.subcat, req.body.marca,
-        //         req.body.nombre, req.body.precio], (err, rows) => {
-        //         if (err) return res.send(err)
+        conn.query(
+            `INSERT INTO productos(codigo, subcat, marca, nombre, precio)
+            values (?, ?, ?, ?, ?)`,
+            [req.body.codigo, req.body.subcat, req.body.marca,
+            req.body.nombre, req.body.precio], (err, rows) => {
+                if (err) return res.send(err)
 
-        //         res.send('Producto Agregado')
-        //     }
-        // )
+                res.send('Producto Agregado')
+            }
+        )
 
-        // conn.query(
-        //     `INSERT INTO stock()`
-        // )
+        var count = Object.keys(req.body.stock).length;
 
-        req.body.stock.map((stock) => {
+        for (let i = 1; i <= count; i++) {
+
             conn.query(
-                `INSERT INTO stock(prod_id, sucursal_id, stock)`
+                `INSERT INTO stock(prod_id, sucursal_id, stock)
+                values (?, ?, ?)`, [req.body.codigo, i, req.body.stock[i - 1], (err, rows) => {
+                if (err) return res.send(err)
+
+                res.send('Stock Ingresado')
+            }]
             )
-        })
+        }
 
 
-        console.log(req.body.nombre)
-
-        // conn.query(
-        //     `INSERT INTO productos`
-        // )
     })
 })
 

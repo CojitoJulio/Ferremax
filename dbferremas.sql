@@ -1,3 +1,5 @@
+create database ferremas_db;
+
 use ferremas_db;
 
 drop table if exists promociones;
@@ -39,7 +41,7 @@ create table productos (
 );
 
 create table stock (
-	stock_id int not null,
+	stock_id int not null auto_increment,
     prod_id int not null,
     sucursal_id int not null,
     stock int,
@@ -65,6 +67,11 @@ values ('Providencia', 'Manuel Montt 3824');
 insert into sucursal(nombre, direccion)
 values ('Puente Alto', 'Casas Viejas 1893');
 
+insert into sucursal(nombre, direccion)
+values ('Maipu', '3 Poninente 2913');
+
+insert into sucursal(nombre, direccion)
+values ('Las Condes', 'Avenida Vitacura 0924');
 
 insert into categorias(categoria)
 values ('Tornillos y Anclajes');

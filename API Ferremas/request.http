@@ -3,15 +3,12 @@ POST http://localhost:3000/api/agregar HTTP/1.1
 Content-Type: application/json
 
 {
-    "codigo": 84923,
-    "subcat": 2,
-    "marca": "Philips",
-    "nombre": "Martillo Pecutor",
-    "precio": 12990,
-    "stock": {
-        "stock1": 12,
-        "stock2": 3
-    }
+    "codigo": 10589234,
+    "subcat": 1,
+    "marca": "Brembo",
+    "nombre": "Tornillo CRS Punta Fina 1P",
+    "precio": 2590,
+    "stock": [12, 0, 5, 38]
 
 }
 
