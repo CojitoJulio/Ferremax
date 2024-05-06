@@ -1,4 +1,4 @@
-create database ferremas_db;
+--  database ferremas_db;
 
 use ferremas_db;
 
