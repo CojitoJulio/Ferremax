@@ -9,7 +9,6 @@ Content-Type: application/json
     "nombre": "Tornillo CRS Punta Fina 1P",
     "precio": 2590,
     "stock": [12, 0, 5, 38]
-
 }
 
 ###

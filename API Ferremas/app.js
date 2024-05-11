@@ -11,7 +11,7 @@ const dbOptions = {
     host: 'localhost',
     prot: 3306,
     user: 'root',
-    password: 'palomamami',
+    password: 'Dani1915#',
     database: 'ferremas_db'
 }
 
@@ -22,7 +22,6 @@ app.use(express.json())
 app.use(cors())
 
 // Rutas
-
 
 app.get('/', (req, res) => {
     res.json({ message: 'hola mundo' })
