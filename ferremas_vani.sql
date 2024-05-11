@@ -2,9 +2,10 @@ DROP DATABASE ferremas_db;
 CREATE DATABASE ferremas_db;
 USE ferremas_db ;
 
-DROP USER 'user1'@'localhost';
+DROP USER if exists 'user1'@'localhost';
 CREATE USER 'user1'@'localhost' IDENTIFIED BY 'palomamami';
 GRANT ALL PRIVILEGES ON  ferremas_db  TO 'user1'@'localhost';
+GRANT SELECT ON ferremas_db.* to 'user1'@'localhost';
 FLUSH PRIVILEGES;
 
 create table categorias (
@@ -89,15 +90,59 @@ values (2, 'Taladros');
 insert into productos(codigo, subcat, marca, nombre, precio)
 values (1, 1, 'Tornichile', 'Tornillo TRS 4P', 2500);
 
+insert into stock(prod_id, sucursal_id, stock)
+values (1, 1, 45); 
+
+insert into stock(prod_id, sucursal_id, stock)
+values (1, 2, 12);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (1, 3, 1);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (1, 4, 0);
+
 insert into productos(codigo, subcat, marca, nombre, precio)
 values (2, 2, 'Wurth', 'Martillo 3 Golpes', 4490);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (2, 1, 9);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (2, 2, 25);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (2, 3, 23);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (2, 4, 12);
 
 insert into productos(codigo, subcat, marca, nombre, precio)
 values (3, 2, 'Wurth', 'Taladro Percutor', 59990);
 
+insert into stock(prod_id, sucursal_id, stock)
+values (3, 1, 1);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (3, 2, 0);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (3, 3, 9);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (3, 4, 2);
+
 insert into productos(codigo, subcat, marca, nombre, precio)
 values (4, 2, 'FerreTools', 'Kit Destornilladores', 3990);
 
-insert into productos(codigo, subcat, marca, nombre, precio)
-values (5, 1, 'FerreTools', 'Galleta', 5990);
+insert into stock(prod_id, sucursal_id, stock)
+values (4, 1, 31);
 
+insert into stock(prod_id, sucursal_id, stock)
+values (4, 2, 52);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (4, 3, 23);
+
+insert into stock(prod_id, sucursal_id, stock)
+values (4, 4, 44);

@@ -40,10 +40,10 @@ routes.get('/sucursales', (req, res) => {
         if (err) return res.send(err)
         conn.query(
             `select * from sucursal`, (err, rows) => {
-            if (err) return res.send(err);
+                if (err) return res.send(err);
 
-            res.json(rows)
-        })
+                res.json(rows)
+            })
     })
 })
 
@@ -52,10 +52,10 @@ routes.get('/categorias', (req, res) => {
         if (err) return res.send(err)
         conn.query(
             `select * from subcat;`, (err, rows) => {
-            if (err) return res.send(err);
+                if (err) return res.send(err);
 
-            res.json(rows)
-        })
+                res.json(rows)
+            })
     })
 })
 
@@ -101,8 +101,8 @@ routes.put('/mod', (req, res) => {
         conn.query(
             `UPDATE productos
             SET subcat= ?, marca= ?, nombre= ?, precio= ?
-            WHERE codigo = ?;`,[req.body.subcat, req.body.marca, 
-                req.body.nombre, req.body.precio, req.body.codigo], (err, rows) => {
+            WHERE codigo = ?;`, [req.body.subcat, req.body.marca,
+        req.body.nombre, req.body.precio, req.body.codigo], (err, rows) => {
             if (err) return res.send(err);
 
             res.json(rows)
@@ -117,21 +117,21 @@ routes.delete('/delete', (req, res) => {
         if (err) return res.send(err)
 
         conn.query(
-        `DELETE from stock 
+            `DELETE from stock 
         where prod_id = ?;`, [req.body.codigo], (err, rows) => {
             if (err) return res.send(err);
 
             res.send('Stock Deleteado')
         }
         )
-        
+
 
         conn.query(
-            `DELETE FROM productos WHERE codigo= ? ;`,[req.body.codigo], (err, rows) => {
-            if (err) return res.send(err);
+            `DELETE FROM productos WHERE codigo= ? ;`, [req.body.codigo], (err, rows) => {
+                if (err) return res.send(err);
 
-            res.send('Deleteado')
-        })
+                res.send('Deleteado')
+            })
     })
 })
 

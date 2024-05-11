@@ -16,11 +16,11 @@ export const Productos = () => {
     const DatosStock = (prod) => {
         setInfo(prod)
     }
-    
+
     useEffect(() => {
         fetchData();
     }, [])
-    
+
     return (
         <div id='productospage'>
             <table id='tools'>
@@ -59,7 +59,7 @@ export const Productos = () => {
                         )}
                     </tbody>
                 </table>
-                    <GetStock producto = {info}/>
+                <GetStock producto={info} />
 
             </div>
         </div>
