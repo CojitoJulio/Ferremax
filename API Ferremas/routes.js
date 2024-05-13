@@ -24,9 +24,10 @@ routes.get('/stock/:codigo', (req, res) => {
     req.getConnection((err, conn) => {
         if (err) return res.send(err)
         conn.query(
-            `select s.nombre, st.stock
+            `select s.nombre, st.stock, p.nombre as producto
             from stock as st
             join sucursal as s on st.sucursal_id = s.sucursal_id
+            join productos as p on st.prod_id = p.codigo
             where prod_id = ?;`, [req.params.codigo], (err, rows) => {
             if (err) return res.send(err);
 
@@ -70,7 +71,13 @@ routes.post('/agregar', (req, res) => {
             values (?, ?, ?, ?, ?)`,
             [req.body.codigo, req.body.subcat, req.body.marca,
             req.body.nombre, req.body.precio], (err, rows) => {
-                if (err) return res.send(err)
+                if (err) {
+
+                    return res.status(400).json({
+                        message: 'Error al agregar el producto',
+                        error: err
+                    });
+                }
 
                 res.send('Producto Agregado')
             }
@@ -134,7 +141,5 @@ routes.delete('/delete', (req, res) => {
             })
     })
 })
-
-
 
 module.exports = routes

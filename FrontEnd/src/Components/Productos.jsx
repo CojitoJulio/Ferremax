@@ -54,7 +54,7 @@ export const Productos = () => {
                                 <td>{prod.nombre}</td>
                                 <td>{prod.marca}</td>
                                 <td>${prod.precio}</td>
-                                <td id='verStock' onClick={() => DatosStock(prod.codigo)}>Ver Stock</td>
+                                <td id='verStock' onClick={() => DatosStock(prod.codigo, prod.nombre)}>Ver Stock</td>
                             </tr>
                         )}
                     </tbody>

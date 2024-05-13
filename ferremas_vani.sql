@@ -6,7 +6,10 @@ DROP USER if exists 'user1'@'localhost';
 CREATE USER 'user1'@'localhost' IDENTIFIED BY 'palomamami';
 GRANT ALL PRIVILEGES ON  ferremas_db  TO 'user1'@'localhost';
 GRANT SELECT ON ferremas_db.* to 'user1'@'localhost';
+GRANT INSERT ON ferremas_db.* to 'user1'@'localhost';
 FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'palomamami';
+ALTER USER 'user1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'palomamami';
 
 create table categorias (
 	cate_id int not null auto_increment,
@@ -72,11 +75,27 @@ values ('Maipu', '3 Poninente 2913');
 insert into sucursal(nombre, direccion)
 values ('Las Condes', 'Avenida Vitacura 0924');
 
+-- Categorias
+
 insert into categorias(categoria)
 values ('Tornillos y Anclajes');
 
 insert into categorias(categoria)
 values ('Herramientas Manuales');
+
+insert into categorias(categoria)
+values ('Materiales Basicos');
+
+insert into categorias(categoria)
+values ('Equipos de Seguridad');
+
+insert into categorias(categoria)
+values ('Fijaciones y Adhesivos');
+
+insert into categorias(categoria)
+values ('Equipos de Medicion');
+
+-- Subcategorias
 
 insert into subcat(categoria, subcat)
 values (1, 'Tornilleria');
@@ -87,8 +106,16 @@ values (2, 'Martillos');
 insert into subcat(categoria, subcat)
 values (2, 'Taladros');
 
+insert into subcat(categoria, subcat)
+values (3, 'Soldadura');
+
+insert into subcat(categoria, subcat)
+values (3, 'Cables');
+
+-- Productos
+
 insert into productos(codigo, subcat, marca, nombre, precio)
-values (1, 1, 'Tornichile', 'Tornillo TRS 4P', 2500);
+values (1, 4, 'Indura', 'Soldadura en Polvo', 2500);
 
 insert into stock(prod_id, sucursal_id, stock)
 values (1, 1, 45); 
@@ -133,7 +160,7 @@ insert into stock(prod_id, sucursal_id, stock)
 values (3, 4, 2);
 
 insert into productos(codigo, subcat, marca, nombre, precio)
-values (4, 2, 'FerreTools', 'Kit Destornilladores', 3990);
+values (4, 5, 'FerreTools', 'Cable Inalambrico x Metro', 3990);
 
 insert into stock(prod_id, sucursal_id, stock)
 values (4, 1, 31);

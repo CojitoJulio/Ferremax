@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 
 export const AddProducto = () => {
@@ -5,14 +6,14 @@ export const AddProducto = () => {
   const [sucursales, setSucursales] = useState([])
   const [categorias, setCategorias] = useState([])
 
+
   // Datos Formulario
   const id = useRef()
   const nombre = useRef()
   const marca = useRef()
   const categoria = useRef()
   const precio = useRef()
-
-
+  const refs = {};
 
   const fetchData = async () => {
     const response = await fetch('http://localhost:3000/api/sucursales');
@@ -24,6 +25,41 @@ export const AddProducto = () => {
     const response = await fetch('http://localhost:3000/api/categorias');
     const catedb = await response.json()
     setCategorias(catedb);
+  }
+
+  const enviar = (e) => {
+    e.preventDefault();
+
+    let producto = {
+      "codigo": id.current.value,
+      "subcat": categoria.current.value,
+      "marca": marca.current.value,
+      "nombre": nombre.current.value,
+      "precio": precio.current.value,
+      "stock": []
+    }
+
+    const valores = {};
+    Object.keys(refs).forEach((key) => {
+      valores[key] = refs[key].value;
+      producto.stock.push(refs[key].value)
+    });
+
+    console.log(producto)
+    postear(producto);
+  };
+
+  const postear = async (producto) => {
+    try {
+      await axios.post("http://localhost:3000/api/agregar", producto)
+      console.log('Agregado con Exito')
+
+    } catch (e) {
+      console.log(e.response.data.message)
+      if (e.response.status == 400) {
+        console.log('error 400 po papito')
+      }
+    }
   }
 
   useEffect(() => {
@@ -74,13 +110,13 @@ export const AddProducto = () => {
             {sucursales.map((sucursal) =>
               <tr key={sucursal.sucursal_id}>
                 <td>{sucursal.nombre}</td>
-                <td><input type="text" /></td>
+                <td><input type="text" ref={(ref) => refs[sucursal.sucursal_id] = ref} /></td>
               </tr>
             )}
           </tbody>
         </table>
         <div id='botones'>
-          <button type='submit'>Agregar</button>
+          <button type='' onClick={enviar} >Agregar</button>
           <button>Limpiar</button>
         </div>
       </form>
