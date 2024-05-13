@@ -8,7 +8,6 @@ GRANT ALL PRIVILEGES ON  ferremas_db  TO 'user1'@'localhost';
 GRANT SELECT ON ferremas_db.* to 'user1'@'localhost';
 GRANT INSERT ON ferremas_db.* to 'user1'@'localhost';
 FLUSH PRIVILEGES;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'palomamami';
 ALTER USER 'user1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'palomamami';
 
 create table categorias (
