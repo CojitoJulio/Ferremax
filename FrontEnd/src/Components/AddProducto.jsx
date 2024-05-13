@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
+import { fetchCate, fetchSucu } from '../Servicios/ServiciosAPI'
 
 export const AddProducto = () => {
 
@@ -14,18 +15,6 @@ export const AddProducto = () => {
   const categoria = useRef()
   const precio = useRef()
   const refs = {};
-
-  const fetchData = async () => {
-    const response = await fetch('http://localhost:3000/api/sucursales');
-    const sucurbd = await response.json()
-    setSucursales(sucurbd);
-  }
-
-  const fetchCate = async () => {
-    const response = await fetch('http://localhost:3000/api/categorias');
-    const catedb = await response.json()
-    setCategorias(catedb);
-  }
 
   const enviar = (e) => {
     e.preventDefault();
@@ -55,7 +44,6 @@ export const AddProducto = () => {
       console.log('Agregado con Exito')
 
     } catch (e) {
-      console.log(e.response.data.message)
       if (e.response.status == 400) {
         console.log('error 400 po papito')
       }
@@ -63,8 +51,18 @@ export const AddProducto = () => {
   }
 
   useEffect(() => {
+    const fetchData = async () => {
+      const sucursalesData = await fetchSucu();
+      setSucursales(sucursalesData)
+    }
+
+    const fetchCateg = async () => {
+      const categoriasData = await fetchCate();
+      setCategorias(categoriasData)
+    }
+
     fetchData();
-    fetchCate();
+    fetchCateg();
   }, [])
 
   return (

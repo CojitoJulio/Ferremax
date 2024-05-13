@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react'
 import { GetStock } from './GetStock';
 import { NavLink } from 'react-router-dom'
+import { fetchProd } from '../Servicios/ServiciosAPI';
 
 export const Productos = () => {
 
     const [data, setData] = useState([])
     const [info, setInfo] = useState([])
 
-    const fetchData = async () => {
-        const response = await fetch('http://localhost:3000/api');
-        const productos = await response.json()
-        setData(productos);
-    }
-
     const DatosStock = (prod) => {
         setInfo(prod)
     }
 
     useEffect(() => {
+        const fetchData = async () => {
+            const ProductosData = await fetchProd()
+            setData(ProductosData)
+        }
+
         fetchData();
     }, [])
 
