@@ -250,3 +250,18 @@ html {
 #botones button:hover {
   background-color: #c6c7c3;
 }
+
+#errors{
+  color: red;
+  background-color: #8181813e;
+  padding: 0 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+small{
+  margin-top: 15px;
+  color: #8f8f8f;
+}

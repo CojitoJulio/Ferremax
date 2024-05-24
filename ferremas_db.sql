@@ -10,6 +10,27 @@ GRANT INSERT ON ferremas_db.* to 'user1'@'localhost';
 FLUSH PRIVILEGES;
 ALTER USER 'user1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'palomamami';
 
+-- Usuarios
+
+create table tipo_usuario (
+	id_tipo int not null,
+    nombre_tipo varchar(30),
+    primary key(id_tipo)
+);
+
+create table usuarios (
+	user_id int not null auto_increment,
+    nombre varchar(30),
+    apellido varchar(30),
+    pass varchar(20),
+    correo varchar(50), 
+    tipo_user int not null,
+    foreign key(tipo_user) references tipo_usuario(id_tipo),
+    primary key(user_id)
+);
+
+-- Productos
+
 create table categorias (
 	cate_id int not null auto_increment,
     categoria varchar(30),
@@ -172,3 +193,19 @@ values (4, 3, 23);
 
 insert into stock(prod_id, sucursal_id, stock)
 values (4, 4, 44);
+
+-- Tipo Usuarios
+
+insert into tipo_usuario(id_tipo, nombre_tipo)
+values (0, 'Administrador');
+
+insert into tipo_usuario(id_tipo, nombre_tipo)
+values (1, 'Cliente');
+
+-- Usuarios
+
+insert into usuarios(nombre, apellido, pass, correo, tipo_user)
+values ("Bruno", "Bevilaqcua", "perroChocolo123", "brunitoAlbo666@gmail.com", 1);
+
+insert into usuarios(nombre, apellido, pass, correo, tipo_user)
+values ("Daniel", "Gutierrez", "CojoJulio123", "cojitojulio@gmail.com", 0);

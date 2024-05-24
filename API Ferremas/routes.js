@@ -60,6 +60,22 @@ routes.get('/categorias', (req, res) => {
     })
 })
 
+routes.get('/usuarios', (req, res) => {
+    req.getConnection((err, conn) => {
+        if (err) return res.send(err)
+        conn.query(
+            `select u.user_id, u.nombre, u.apellido, u.pass, u.correo, u.tipo_user, tp.nombre_tipo
+            from usuarios as u
+            join tipo_usuario as tp
+            on tp.id_tipo = u.tipo_user;`, (err, rows) => {
+                if (err) return res.send(err);
+
+                res.json(rows)
+            }
+        )
+    })
+})
+
 // Post
 
 routes.post('/agregar', (req, res) => {

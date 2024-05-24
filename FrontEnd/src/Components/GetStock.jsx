@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-
 export const GetStock = ({ producto }) => {
 
     const [stock, setStock] = useState([])
