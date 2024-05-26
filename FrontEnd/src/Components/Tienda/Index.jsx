@@ -61,7 +61,7 @@ export const Index = () => {
                 </div>
             </section>
 
-            <span>Envios gratis por compras desde $90.000</span>
+            <span id='envios'>Envios gratis por compras desde $90.000</span>
 
             <h1>Promociones</h1>
 
@@ -69,8 +69,8 @@ export const Index = () => {
 
             <div className="ofertones">
 
-                {promos.filter(promo => promo.precio_promocion > 0).slice(0, 4).map((promo) => (
-                    <Item key={promo.producto} prod={promo} />
+                {promos.filter(promo => promo.precio_promocion > 0).slice(0, 4).map((promo, i) => (
+                    <Item key={i} prod={promo} />
                 ))}
 
             </div>

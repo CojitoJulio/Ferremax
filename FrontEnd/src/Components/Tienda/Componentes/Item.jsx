@@ -27,7 +27,7 @@ export const Item = ({ prod }) => {
     }
 
     return (
-        <div className="prodoff">
+        <div className="prodoff" key={prod.producto}>
             <img src={prod.imagen} alt="" />
             <p>{prod.marca}</p>
             <p>{prod.nombre}</p>
