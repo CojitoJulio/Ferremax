@@ -1,19 +1,19 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { fetchCate, fetchProd, fetchSucu } from '../Servicios/ServiciosAPI'
 import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
+import { fetchCate, fetchProd, fetchSucu } from '../../Servicios/ServiciosAPI'
 
 export const AddProducto = () => {
-  
+
   const [sucursales, setSucursales] = useState([])
   const [categorias, setCategorias] = useState([])
   const [productos, setProductos] = useState([])
   const [errors, setErrors] = useState({});
   const [errorID, setErrorID] = useState('');
   const navigate = useNavigate();
-  
-  const [datosForm, setDatosForm] = useState({codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0, stock: []})
+
+  const [datosForm, setDatosForm] = useState({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0, stock: [] })
 
   // Validaciones
 
@@ -26,7 +26,6 @@ export const AddProducto = () => {
     precio: z.number({
       invalid_type_error: "El precio debe ser un número"
     }).min(1, 'El precio es requerido')
-
   });
 
   const handleChange = (e) => {
@@ -63,14 +62,16 @@ export const AddProducto = () => {
         precio: Number(datosForm.precio)
       });
 
+      console.log(parsedData)
+
       const stockes = AddStock()
-    
-      const UpdatedData = ({...datosForm, stock: stockes})
-      if(!errorID){
+
+      const UpdatedData = ({ ...datosForm, stock: stockes })
+      if (!errorID) {
         postear(UpdatedData);
         setErrors({})
       }
-      
+
     } catch (err) {
       if (err instanceof z.ZodError) {
         const fieldErrors = {};
@@ -83,7 +84,7 @@ export const AddProducto = () => {
       }
     }
   };
-  
+
   const refs = {};
 
   const AddStock = () => {
@@ -106,6 +107,7 @@ export const AddProducto = () => {
 
     } catch (e) {
       if (e.response.status == 400) {
+        return
       }
     }
   }
@@ -141,7 +143,7 @@ export const AddProducto = () => {
           <tbody>
             <tr>
               <td>Codigo</td>
-              <td><input type="text" maxLength="13" name='codigo' value={setDatosForm.codigo} onChange={handleChange}/></td>
+              <td><input type="text" maxLength="9" name='codigo' value={setDatosForm.codigo} onChange={handleChange} /></td>
             </tr>
             <tr>
               <td>Nombre</td>
@@ -176,23 +178,23 @@ export const AddProducto = () => {
             {sucursales.map((sucursal) =>
               <tr key={sucursal.sucursal_id}>
                 <td>{sucursal.nombre}</td>
-                <td><input type="text" ref={(ref) => refs[sucursal.sucursal_id] = ref}/></td>
+                <td><input type="text" ref={(ref) => refs[sucursal.sucursal_id] = ref} /></td>
               </tr>
             )}
           </tbody>
         </table>
         <section id='errors'>
-          { errorID && <p>{errorID}</p>}
-          { errors.codigo && <p>{errors.codigo}</p>}
-          { errors.nombre && <p>{errors.nombre}</p>}
-          { errors.marca && <p>{errors.marca}</p>}
-          { errors.precio && <p>{errors.precio}</p>}
+          {errorID && <p>{errorID}</p>}
+          {errors.codigo && <p>{errors.codigo}</p>}
+          {errors.nombre && <p>{errors.nombre}</p>}
+          {errors.marca && <p>{errors.marca}</p>}
+          {errors.precio && <p>{errors.precio}</p>}
         </section>
         <div id='botones'>
           <button type='' onClick={enviar} >Agregar</button>
           <button>Limpiar</button>
         </div>
-      <small>Si el campo de stock está vacío, este se dejará como 0</small>
+        <small>Si el campo de stock está vacío, este se dejará como 0</small>
       </form>
     </div>
   )

@@ -9,7 +9,7 @@ routes.get('/', (req, res) => {
         if (err) return res.send(err)
 
         conn.query(
-            `SELECT p.codigo, sc.subcat, p.marca, p.nombre, p.precio
+            `SELECT p.codigo, sc.subcat, p.marca, p.nombre, p.precio, sc.imagen
             FROM productos as p 
             join subcat as sc on p.subcat = sc.subcat_id
             order by p.nombre`, (err, rows) => {
@@ -68,11 +68,41 @@ routes.get('/usuarios', (req, res) => {
             from usuarios as u
             join tipo_usuario as tp
             on tp.id_tipo = u.tipo_user;`, (err, rows) => {
-                if (err) return res.send(err);
+            if (err) return res.send(err);
 
-                res.json(rows)
-            }
+            res.json(rows)
+        }
         )
+    })
+})
+
+routes.get('/promos', (req, res) => {
+    req.getConnection((err, conn) => {
+        if (err) return res.send(err)
+        conn.query(
+            `select p.promo_id, p.producto, pr.nombre,pr.precio, p.preciop, p.iniciop, p.finalp, sc.imagen, pr.marca
+            from promociones p
+            join productos pr on pr.codigo = p.producto
+            join subcat sc on pr.subcat = sc.subcat_id;`, (err, rows) => {
+            if (err) return res.send(err);
+
+            res.json(rows)
+        })
+    })
+})
+
+routes.get('/producto/:codigo', (req, res) => {
+    req.getConnection((err, conn) => {
+        if (err) return res.send(err)
+        conn.query(
+            `select p.codigo, p.marca, p.nombre, p.precio, sc.subcat
+            from productos as p
+            join subcat as sc on p.subcat = sc.subcat_id
+            where p.codigo = ?;`, [req.params.codigo], (err, rows) => {
+            if (err) return res.send(err);
+
+            res.json(rows)
+        })
     })
 })
 

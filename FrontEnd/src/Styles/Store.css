@@ -1,0 +1,250 @@
+.inicio {
+  width: 1080px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 40px;
+  color: #333333;
+}
+
+/* NavBar */
+
+.NavBar {
+  background-color: #395551;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  height: 80px;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: white; /* Color del enlace visitado */
+}
+
+.nombre {
+  font-size: 35px;
+  margin-left: 20px;
+}
+
+.utilities {
+  display: flex;
+  flex-direction: row;
+}
+
+.utilities ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.utilities button {
+  width: 40px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  margin-right: 10px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.utilities button svg {
+  width: 25px;
+  height: 25px;
+}
+
+/* Banner Promo */
+
+.PromoBanner {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.PromoBanner img {
+  width: 100%;
+  display: block;
+  filter: brightness(50%);
+}
+
+.PromoBanner .contentPromo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infobanner {
+  height: 400px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.infobanner p {
+  font-size: 30px;
+  margin: 10px 0;
+  font-weight: 400;
+}
+
+.infobanner h2 {
+  font-size: 50px;
+  margin: 0px;
+}
+
+.infobanner small {
+  font-size: 15px;
+  color: white;
+}
+
+.infobanner button {
+  margin-top: 20px;
+  width: 120px;
+  height: 40px;
+  border-radius: 0;
+  border: none;
+  letter-spacing: 2px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.grant {
+  padding: 5px 20px;
+  background-color: #cc5232;
+  font-size: 25px;
+  font-weight: bold;
+  max-width: 200px;
+  height: 180px;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.grant p {
+  margin: 0;
+}
+
+#firstp {
+  color: black;
+  font-size: 40px;
+}
+
+span {
+  height: 40px;
+  color: white;
+  background-color: #cc5232;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 25px;
+  font-size: 20px;
+  align-items: center;
+}
+
+/* Promociones */
+
+.ofertones {
+  height: 400px;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.prodoff {
+  width: auto;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.prodoff img {
+  width: 100%;
+}
+
+.prodoff .price {
+  display: flex;
+  gap: 5px;
+}
+
+.prodoff p {
+  margin: 10px;
+  font-weight: 600;
+}
+
+.separation {
+  width: 100%;
+  height: 60px;
+}
+
+#lastprice {
+  text-decoration: line-through;
+  color: grey;
+}
+
+#newprice {
+  font-size: 25px;
+}
+
+/* Marcas */
+
+.marcas {
+  height: 400px;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.brand {
+  width: auto;
+}
+
+.brand .banner {
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.brand img {
+  width: 100%;
+}
+
+.brandbody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px 0px;
+  background-color: #f0f0f0;
+}
+.brandbody small {
+  font-size: 15px;
+  color: #333333;
+  margin-bottom: 5px;
+}
+
+.brandbody p {
+  margin: 5px;
+  font-size: 20px;
+  font-weight: 600;
+}

@@ -1,17 +1,16 @@
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
-import { Productos } from '../Components/Productos';
-import { AddProducto } from '../Components/AddProducto';
+import { Administration } from "../Components/Admin/Administration";
+import { InitialPage } from "../Components/Tienda/InitialPage";
 
 
 export const MisRutas = () => {
   return (
     <BrowserRouter>
-      {/* Navegacion */}
 
       <Routes>
-        <Route path="/" element={<Navigate to={'/productos'} />} />
-        <Route path="/productos" element={<Productos />} />
-        <Route path="/agregar" element={<AddProducto />} />
+        <Route path="/" element={<Navigate to={'/store'} />} />
+        <Route path="/administration/*" element={<Administration />} />
+        <Route path="/store/*" element={<InitialPage />} />
       </Routes>
 
     </BrowserRouter>

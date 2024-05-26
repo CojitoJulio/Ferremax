@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
+import { fetchProd } from '../../Servicios/ServiciosAPI';
 import { GetStock } from './GetStock';
-import { NavLink } from 'react-router-dom'
-import { fetchProd } from '../Servicios/ServiciosAPI';
 
 export const Productos = () => {
 
@@ -23,17 +22,6 @@ export const Productos = () => {
 
     return (
         <div id='productospage'>
-            <table id='tools'>
-                <tbody>
-                    <tr>
-                        <td><NavLink to={'/agregar'} id='linkaso'>Agregar Producto</NavLink></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
             <div id='titulo'>
                 <h1 id='nombret'>FERREMAS</h1>
                 <h1 id='inventariot'>INVENTARIO</h1>

@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div id='main'>
-        <MisRutas/>
+        <MisRutas />
       </div>
     </>
   )

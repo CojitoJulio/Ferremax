@@ -15,3 +15,9 @@ export const fetchProd = async () => {
     const productos = await response.json()
     return productos;
 }
+
+export const fecthPromos = async () => {
+    const response = await fetch('http://localhost:3000/api/promos');
+    const promos = await response.json()
+    return promos;
+}
