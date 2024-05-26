@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './../../Styles/Store.css'
 import { Item } from './Componentes/Item'
-import { fecthPromos } from '../../Servicios/ServiciosAPI'
+import { fetchProd } from '../../Servicios/ServiciosAPI'
 import { Brand } from './Componentes/Brand'
 
 export const Index = () => {
@@ -9,12 +9,12 @@ export const Index = () => {
     const [promos, setPromos] = useState([]);
 
     useEffect(() => {
-        const fetchPromos = async () => {
-            const promosData = await fecthPromos();
-            setPromos(promosData)
+        const fetchData = async () => {
+            const ProductosData = await fetchProd()
+            setPromos(ProductosData)
         }
 
-        fetchPromos();
+        fetchData();
     }, [])
 
     const brands = [{
@@ -37,8 +37,6 @@ export const Index = () => {
         "desc": "20%",
         "url": "https://www.revista.ferrepat.com/wp-content/uploads/2018/04/eeee.png"
     }]
-
-
 
     return (
         <div className='inicio'>
@@ -71,9 +69,10 @@ export const Index = () => {
 
             <div className="ofertones">
 
-                {promos.slice(0, 4).map((promo) => (
-                    <Item key={promo.producto} promo={promo} />
+                {promos.filter(promo => promo.precio_promocion > 0).slice(0, 4).map((promo) => (
+                    <Item key={promo.producto} prod={promo} />
                 ))}
+
             </div>
 
             {/* Otro banner */}

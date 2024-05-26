@@ -163,7 +163,7 @@ span {
 /* Promociones */
 
 .ofertones {
-  height: 400px;
+  height: 420px;
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(4, 1fr);
@@ -201,6 +201,24 @@ span {
 
 #newprice {
   font-size: 25px;
+}
+
+.addCart {
+  display: flex;
+  justify-content: center;
+}
+
+.addCart button {
+  border: none;
+  background-color: #cc5232;
+  color: white;
+  height: 40px;
+  transition: all 300ms;
+  cursor: pointer;
+}
+
+.addCart button:hover {
+  background-color: #9c3e27;
 }
 
 /* Marcas */
@@ -247,4 +265,10 @@ span {
   margin: 5px;
   font-size: 20px;
   font-weight: 600;
+}
+
+/* All Products */
+
+.allprods {
+  margin-top: 40px;
 }

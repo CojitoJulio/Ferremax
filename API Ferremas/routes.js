@@ -9,10 +9,11 @@ routes.get('/', (req, res) => {
         if (err) return res.send(err)
 
         conn.query(
-            `SELECT p.codigo, sc.subcat, p.marca, p.nombre, p.precio, sc.imagen
+            `SELECT p.codigo, sc.subcat, p.marca, p.nombre, p.precio, COALESCE(pr.preciop, 0) AS precio_promocion, sc.imagen
             FROM productos as p 
             join subcat as sc on p.subcat = sc.subcat_id
-            order by p.nombre`, (err, rows) => {
+            left join promociones as pr on pr.producto = p.codigo
+            order by p.nombre;`, (err, rows) => {
             if (err) return res.send(err);
 
             res.json(rows)
