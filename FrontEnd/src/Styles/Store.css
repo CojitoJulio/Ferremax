@@ -5,9 +5,20 @@
   justify-content: center;
 }
 
+#main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 h1 {
   font-size: 40px;
   color: #333333;
+}
+
+.Total{
+  width: 1080px;
 }
 
 /* NavBar */
@@ -315,6 +326,12 @@ a:visited {
   font-size: 20px;
 }
 
+.row-products{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
 .cart-total {
   display: flex;
   gap: 15px;
@@ -325,4 +342,22 @@ a:visited {
 
 .hidden-cart {
   display: none;
+}
+
+.Pagar{
+  display: flex;
+  justify-content: center;
+  padding:  15px 0;
+}
+
+.Pagar button {
+  width: 150px;
+  color: black;
+  background-color: white;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.Pagar button a {
+  color: black;
 }

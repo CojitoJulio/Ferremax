@@ -1,16 +1,35 @@
-import { useRef } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
+import { CartContext } from "../../../Contexts/CartProvider";
+import { Link } from "react-router-dom";
 
 export const Cart = () => {
 
     const carrito = useRef(null)
+    const [cart, setCart] = useContext(CartContext)
+    const [suma, setSuma] = useState(0)
 
     const OpenCart = () => {
-        if (carrito.current.classList != 'container-cart-products hidden-cart') {
-            carrito.current.classList.add('hidden-cart')
-        } else {
-            carrito.current.classList.remove('hidden-cart')
+        carrito.current.classList.toggle('hidden-cart');
+    };
+
+    const handleClickOutside = (event) => {
+        if (carrito.current && !carrito.current.contains(event.target) && !event.target.closest('button')) {
+            carrito.current.classList.add('hidden-cart');
         }
-    }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
+        const sum = cart.reduce((acc, cartP) => acc + cartP.precio * cartP.quantity, 0);
+        setSuma(sum);
+
+    },[cart])
 
 
     return (
@@ -23,32 +42,32 @@ export const Cart = () => {
 
             <div className="container-cart-products hidden-cart" ref={carrito}>
                 <div className="row-products">
-                    <div className="cart-products">
-                        <div className="cart-img">
-                            <img src="https://baumart.cl/wp-content/uploads/2024/02/martillo-inoxcrom.webp" alt="" />
-                        </div>
-                        <div className="info-cart-product">
-                            <span className="cantidad-prod-cart">1</span>
-                            <p className="titulo-prod-cart">Taladro</p>
-                            <span className="precio-prod-cart">$87000</span>
-                        </div>
-                    </div>
-                    <div className="cart-products">
-                        <div className="cart-img">
-                            <img src="https://baumart.cl/wp-content/uploads/2024/02/martillo-inoxcrom.webp" alt="" />
-                        </div>
-                        <div className="info-cart-product">
-                            <span className="cantidad-prod-cart">1</span>
-                            <p className="titulo-prod-cart">Taladro</p>
-                            <span className="precio-prod-cart">$87000</span>
-                        </div>
-                    </div>
+                    {cart.length > 0 ?  
+                        cart.map((cartP, i) => (
+                            <div className="cart-products" key={i}>
+                                <div className="cart-img">
+                                    <img src={cartP.imagen} alt="" />
+                                </div>
+                                <div className="info-cart-product">
+                                    <span className="cantidad-prod-cart">{cartP.quantity}</span>
+                                    <p className="titulo-prod-cart">{cartP.nombre}</p>
+                                    <span className="precio-prod-cart">${cartP.precio * cartP.quantity}</span>
+                                </div>
+                            </div>
+                        ))
+                    : <h1>Carrito Vacio</h1>}                    
                 </div>
                 <div className="cart-total">
                     <h3>Total:</h3>
-                    <span>$ 87000</span>
+                    <span>$ {new Intl.NumberFormat("de-DE").format(suma)}</span>
                 </div>
+                {cart.length > 0 ? <div className="Pagar">
+                    <button ><Link to="resumen">PAGAR</Link></button>
+                </div>
+                : <></>}
+                
             </div>
+
         </div>
     )
 }

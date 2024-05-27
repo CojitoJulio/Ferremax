@@ -21,8 +21,8 @@ export const AllProducts = () => {
             <h1>Todos los Productos</h1>
             <div className="ofertones">
 
-                {prods.map((prod) => (
-                    <Item key={prod.producto} prod={prod} />
+                {prods.map((prod, i) => (
+                    <Item key={i} prod={prod} />
                 ))}
 
             </div>

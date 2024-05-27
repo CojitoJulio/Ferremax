@@ -7,21 +7,29 @@ export const Item = ({ prod }) => {
 
     const addToCart = () => {
 
+        console.log(prod.codigo)
+
         setCart((currItems) => {
-            const isItemsFound = currItems.find((item) => item.id === prod.producto);
+            const isItemsFound = currItems.find((item) => item.id === prod.codigo);
             if (isItemsFound) {
                 return currItems.map((item) => {
-                    if (item.id === prod.producto) {
+                    if (item.id === prod.codigo) {
                         return { ...item, quantity: item.quantity + 1 };
                     } else {
                         return item;
                     }
                 })
             } else {
-                var id = prod.producto
-                var precio = prod.preciop
+                var id = prod.codigo
+                var imagen = prod.imagen
+                var nombre = prod.nombre
+                if (prod.precio_promocion > 0) {
+                    var precio = prod.precio_promocion
+                } else {
+                    var precio = prod.precio
+                }
 
-                return [...currItems, { id, quantity: 1, precio }]
+                return [...currItems, { id, quantity: 1, precio, nombre, imagen}]
             }
         })
     }

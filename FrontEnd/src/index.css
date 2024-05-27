@@ -42,6 +42,7 @@ html {
 
 #linkaso {
   text-decoration: none;
+  color: black;
 }
 
 #tools td:hover {
@@ -52,6 +53,7 @@ html {
   background-color: #395551;
   padding: 0px 20px 20px 20px;
   margin-top: 20px;
+  width: 100%;
 }
 
 #titulo {

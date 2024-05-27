@@ -179,5 +179,6 @@ values (0, 'Administrador'),
 
 insert into usuarios(nombre, apellido, pass, correo, tipo_user)
 values ("Bruno", "Bevilaqcua", "perroChocolo123", "brunitoAlbo666@gmail.com", 1),
-       ("Daniel", "Gutierrez", "CojoJulio123", "cojitojulio@gmail.com", 0);
+       ("Daniel", "Gutierrez", "CojoJulio123", "cojitojulio@gmail.com", 0),
+       ("Michele", "Mouton", "MichelleQuattro51", "michelequattro@gmail.com", 1);
 

@@ -4,6 +4,7 @@ const connection = require('express-myconnection')
 const cors = require('cors')
 
 const routes = require('./routes')
+const routestb = require('./routestb')
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -28,6 +29,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', routes);
+
+app.use('/transbank', routestb)
 
 // Server Running
 

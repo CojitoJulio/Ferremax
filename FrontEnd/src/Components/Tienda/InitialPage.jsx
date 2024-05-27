@@ -3,14 +3,16 @@ import { Index } from "./Index"
 import { CartProvider } from "../../Contexts/CartProvider"
 import { AllProducts } from "./AllProducts"
 import { Cart } from "./Componentes/Cart"
+import { ResumenPage } from "./Payment/ResumenPage"
+import { Final } from "./Payment/Final"
 
 export const InitialPage = () => {
     return (
         <CartProvider>
-            <div>
+            <div className="Total">
                 <div className="NavBar">
                     <div className="nombre">
-                        <h2>Ferremas</h2>
+                        <h2><Link to="">Ferremas</Link></h2>
                     </div>
                     <div className="utilities">
                         <ul>
@@ -25,6 +27,8 @@ export const InitialPage = () => {
                 <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/productos" element={<AllProducts />} />
+                    <Route path="/resumen" element={<ResumenPage />} />
+                    <Route path="/final" element={<Final />} />
                 </Routes>
             </div>
         </CartProvider>
