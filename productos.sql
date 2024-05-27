@@ -1,267 +1,162 @@
--- Insertar productos
+-- Productos
 insert into productos(codigo, subcat, marca, nombre, precio)
-values (1, 4, 'Indura', 'Soldadura en Polvo', 2500),
-       (2, 5, 'Bosch', 'Taladro Inalámbrico', 12500),
-       (3, 3, 'Truper', 'Martillo Carpintero', 800),
-       (4, 2, 'DeWalt', 'Sierra Circular', 8500),
-       (5, 1, 'Stanley', 'Destornillador Phillips', 450),
-       (6, 3, 'Makita', 'Lijadora Orbital', 3200),
-       (7, 5, 'Black & Decker', 'Amoladora Angular', 4700),
-       (8, 4, '3M', 'Mascarilla Respiratoria', 1500),
-       (9, 2, 'Karcher', 'Hidrolavadora', 13500),
-       (10, 1, 'Irwin', 'Alicates Universales', 600);
+values 
+(1, 1, 'Fischer', 'Tornillo para Madera', 300),
+(2, 5, 'Stanley', 'Martillo de Carpintero', 5500),
+(3, 2, 'DeWalt', 'Lijadora Orbital', 8800),
+(4, 3, 'Makita', 'Destornillador Eléctrico', 7500),
+(5, 2, 'Black & Decker', 'Llave Ajustable', 4300),
+(6, 2, 'Bosch', 'Sierra Circular', 11900),
+(7, 7, 'Hilti', 'Martillo Demoledor', 24500),
+(8, 2, 'Dremel', 'Herramienta Rotativa', 9200),
+(9, 2, 'Makita', 'Taladro Percutor', 13500),
+(10, 2, 'Klein', 'Llave Inglesa', 4800),
+(11, 8, 'Black & Decker', 'Taladro Atornillador', 11700),
+(12, 2, 'Dewalt', 'Taladro de Impacto', 12800),
+(13, 2, 'Makita', 'Sierra de Calar', 10200),
+(14, 3, 'Indura', 'Soldadura en Polvo', 2500),
+(15, 6, 'Ceresita', 'Pintura Blanca', 6800),
+(16, 3, 'Tricolor', 'Barniz Marino', 7900),
+(17, 8, 'Maestro', 'Cemento Portland', 5500),
+(18, 7, 'Arena', 'Arena Gruesa', 1200),
+(19, 5, 'Maestro', 'Ladrillos Comunes', 400),
+(20, 9, 'Indura', 'Cables Eléctricos', 3000),
+(21, 10, 'Tricolor', 'Barniz Poliuretano', 8200),
+(22, 12, 'Tricolor', 'Pintura de Interiores', 7800),
+(23, 6, '3M', 'Lentes de Seguridad', 1500),
+(24, 9, '3M', 'Cascos de Seguridad', 3500),
+(25, 9, 'Petzl', 'Guantes para Construcción', 2500),
+(26, 4, 'Petzl', 'Guantes Anticorte', 3000),
+(27, 5, 'Stanley', 'Medidor Láser', 4500),
+(28, 6, 'Stanley', 'Huincha Métrica', 1500),
+(29, 8, 'Bosch', 'Nivel Láser', 9700),
+(30, 6, 'Bosch', 'Medidor de Distancia', 8800);
 
--- Insertar stock para el producto 1
+-- Stock
 insert into stock(prod_id, sucursal_id, stock)
-values (1, 1, 45),
-       (1, 2, 12),
-       (1, 3, 1),
-       (1, 4, 0);
+values 
+(1, 1, 45), (1, 2, 12), (1, 3, 1), (1, 4, 0),
+(2, 1, 30), (2, 2, 20), (2, 3, 10), (2, 4, 5),
+(3, 1, 50), (3, 2, 40), (3, 3, 30), (3, 4, 20),
+(4, 1, 25), (4, 2, 15), (4, 3, 10), (4, 4, 5),
+(5, 1, 60), (5, 2, 50), (5, 3, 40), (5, 4, 30),
+(6, 1, 35), (6, 2, 25), (6, 3, 15), (6, 4, 5),
+(7, 1, 45), (7, 2, 35), (7, 3, 25), (7, 4, 15),
+(8, 1, 40), (8, 2, 30), (8, 3, 20), (8, 4, 10),
+(9, 1, 20), (9, 2, 15), (9, 3, 10), (9, 4, 5),
+(10, 1, 100), (10, 2, 90), (10, 3, 80), (10, 4, 70),
+(11, 1, 10), (11, 2, 8), (11, 3, 6), (11, 4, 4),
+(12, 1, 60), (12, 2, 50), (12, 3, 40), (12, 4, 30),
+(13, 1, 30), (13, 2, 20), (13, 3, 10), (13, 4, 5),
+(14, 1, 80), (14, 2, 70), (14, 3, 60), (14, 4, 50),
+(15, 1, 50), (15, 2, 40), (15, 3, 30), (15, 4, 20),
+(16, 1, 15), (16, 2, 12), (16, 3, 10), (16, 4, 8),
+(17, 1, 100), (17, 2, 90), (17, 3, 80), (17, 4, 70),
+(18, 1, 150), (18, 2, 140), (18, 3, 130), (18, 4, 120),
+(19, 1, 200), (19, 2, 180), (19, 3, 160), (19, 4, 140),
+(20, 1, 50), (20, 2, 40), (20, 3, 30), (20, 4, 20),
+(21, 1, 20), (21, 2, 15), (21, 3, 10), (21, 4, 5),
+(22, 1, 30), (22, 2, 25), (22, 3, 20), (22, 4, 15),
+(23, 1, 60), (23, 2, 50), (23, 3, 40), (23, 4, 30),
+(24, 1, 25), (24, 2, 20), (24, 3, 15), (24, 4, 10),
+(25, 1, 70), (25, 2, 60), (25, 3, 50), (25, 4, 40),
+(26, 1, 15), (26, 2, 12), (26, 3, 10), (26, 4, 8),
+(27, 1, 45), (27, 2, 35), (27, 3, 25), (27, 4, 15),
+(28, 1, 55), (28, 2, 45), (28, 3, 35), (28, 4, 25),
+(29, 1, 20), (29, 2, 15), (29, 3, 10), (29, 4, 5),
+(30, 1, 30), (30, 2, 25), (30, 3, 20), (30, 4, 15);
 
--- Insertar stock para el producto 2
-insert into stock(prod_id, sucursal_id, stock)
-values (2, 1, 20),
-       (2, 2, 5),
-       (2, 3, 15),
-       (2, 4, 3);
-
--- Insertar stock para el producto 3
-insert into stock(prod_id, sucursal_id, stock)
-values (3, 1, 30),
-       (3, 2, 25),
-       (3, 3, 10),
-       (3, 4, 5);
-
--- Insertar stock para el producto 4
-insert into stock(prod_id, sucursal_id, stock)
-values (4, 1, 10),
-       (4, 2, 7),
-       (4, 3, 8),
-       (4, 4, 6);
-
--- Insertar stock para el producto 5
-insert into stock(prod_id, sucursal_id, stock)
-values (5, 1, 50),
-       (5, 2, 45),
-       (5, 3, 20),
-       (5, 4, 30);
-
--- Insertar stock para el producto 6
-insert into stock(prod_id, sucursal_id, stock)
-values (6, 1, 15),
-       (6, 2, 5),
-       (6, 3, 3),
-       (6, 4, 10);
-
--- Insertar stock para el producto 7
-insert into stock(prod_id, sucursal_id, stock)
-values (7, 1, 8),
-       (7, 2, 12),
-       (7, 3, 7),
-       (7, 4, 2);
-
--- Insertar stock para el producto 8
-insert into stock(prod_id, sucursal_id, stock)
-values (8, 1, 35),
-       (8, 2, 20),
-       (8, 3, 10),
-       (8, 4, 5);
-
--- Insertar stock para el producto 9
-insert into stock(prod_id, sucursal_id, stock)
-values (9, 1, 4),
-       (9, 2, 3),
-       (9, 3, 5),
-       (9, 4, 2);
-
--- Insertar stock para el producto 10
-insert into stock(prod_id, sucursal_id, stock)
-values (10, 1, 25),
-       (10, 2, 18),
-       (10, 3, 12),
-       (10, 4, 6);
-
--- Insertar productos adicionales
+-- Productos
 insert into productos(codigo, subcat, marca, nombre, precio)
-values (11, 2, 'Bosch', 'Lijadora de Banda', 6500),
-       (12, 4, 'Stanley', 'Cinta Métrica', 700),
-       (13, 5, 'DeWalt', 'Esmeriladora', 5400),
-       (14, 3, 'Makita', 'Atornillador Eléctrico', 3500),
-       (15, 1, 'Truper', 'Llave Ajustable', 1200),
-       (16, 5, 'Indura', 'Careta para Soldar', 2000),
-       (17, 2, 'Klein Tools', 'Multímetro Digital', 4500),
-       (18, 4, 'Black & Decker', 'Sierra de Calar', 5800),
-       (19, 3, 'Irwin', 'Pinza de Presión', 1600),
-       (20, 1, 'Bosch', 'Cortador de Cerámica', 7500),
-       (21, 2, 'Stanley', 'Nivel Láser', 8200),
-       (22, 4, 'Truper', 'Guantes de Trabajo', 900),
-       (23, 5, 'DeWalt', 'Compresor de Aire', 11000),
-       (24, 3, 'Makita', 'Soplador de Hojas', 8700),
-       (25, 1, 'Irwin', 'Brocas para Madera', 650),
-       (26, 2, 'Karcher', 'Aspiradora Industrial', 9200),
-       (27, 4, '3M', 'Cinta Aislante', 300),
-       (28, 3, 'Black & Decker', 'Taladro Percutor', 6800),
-       (29, 5, 'Indura', 'Electrodo de Soldadura', 1800),
-       (30, 1, 'Stanley', 'Cepillo de Carpintero', 1350);
+values 
+(31, 1, 'Hilti', 'Tornillo Autotaladrante', 400),
+(32, 2, 'Stanley', 'Martillo de Bola', 5700),
+(33, 3, 'DeWalt', 'Lijadora de Banda', 9400),
+(34, 4, 'Makita', 'Destornillador de Impacto', 8300),
+(35, 5, 'Black & Decker', 'Llave de Tuercas', 4600),
+(36, 6, 'Bosch', 'Sierra de Mesa', 15500),
+(37, 7, 'Hilti', 'Martillo Perforador', 21000),
+(38, 8, 'Dremel', 'Mini Herramienta Rotativa', 9500),
+(39, 9, 'Makita', 'Taladro de Columna', 16500),
+(40, 10, 'Klein', 'Llave para Tuberías', 5000),
+(41, 11, 'Black & Decker', 'Taladro Eléctrico', 11200),
+(42, 12, 'Dewalt', 'Atornillador de Impacto', 11800),
+(43, 13, 'Makita', 'Sierra de Inglete', 14200),
+(44, 14, 'Indura', 'Soldadura Mig', 2700),
+(45, 15, 'Ceresita', 'Pintura Esmalte', 7200),
+(46, 16, 'Tricolor', 'Barniz Sintético', 8100),
+(47, 17, 'Maestro', 'Cemento de Alta Resistencia', 6000),
+(48, 18, 'Arena', 'Arena Fina', 1500),
+(49, 19, 'Maestro', 'Ladrillos Refractarios', 600),
+(50, 20, 'Indura', 'Cables Subterráneos', 3400),
+(51, 21, 'Tricolor', 'Barniz Antideslizante', 8700),
+(52, 22, 'Tricolor', 'Pintura Exterior', 8200),
+(53, 23, '3M', 'Lentes de Protección', 1800),
+(54, 1, '3M', 'Cascos de Obra', 3800),
+(55, 2, 'Petzl', 'Guantes de Seguridad', 2800),
+(56, 3, 'Petzl', 'Guantes Resistentes a Cortes', 3300),
+(57, 4, 'Stanley', 'Medidor Ultrasónico', 4700),
+(58, 5, 'Stanley', 'Cinta Métrica', 1700),
+(59, 6, 'Bosch', 'Nivel Electrónico', 10000),
+(60, 7, 'Bosch', 'Medidor de Espesor', 9200);
 
--- Insertar stock para el producto 11
+-- Stock
 insert into stock(prod_id, sucursal_id, stock)
-values (11, 1, 15),
-       (11, 2, 7),
-       (11, 3, 10),
-       (11, 4, 5);
-
--- Insertar stock para el producto 12
-insert into stock(prod_id, sucursal_id, stock)
-values (12, 1, 50),
-       (12, 2, 35),
-       (12, 3, 20),
-       (12, 4, 10);
-
--- Insertar stock para el producto 13
-insert into stock(prod_id, sucursal_id, stock)
-values (13, 1, 10),
-       (13, 2, 5),
-       (13, 3, 8),
-       (13, 4, 2);
-
--- Insertar stock para el producto 14
-insert into stock(prod_id, sucursal_id, stock)
-values (14, 1, 20),
-       (14, 2, 10),
-       (14, 3, 15),
-       (14, 4, 7);
-
--- Insertar stock para el producto 15
-insert into stock(prod_id, sucursal_id, stock)
-values (15, 1, 30),
-       (15, 2, 25),
-       (15, 3, 12),
-       (15, 4, 8);
-
--- Insertar stock para el producto 16
-insert into stock(prod_id, sucursal_id, stock)
-values (16, 1, 18),
-       (16, 2, 14),
-       (16, 3, 5),
-       (16, 4, 3);
-
--- Insertar stock para el producto 17
-insert into stock(prod_id, sucursal_id, stock)
-values (17, 1, 12),
-       (17, 2, 6),
-       (17, 3, 9),
-       (17, 4, 4);
-
--- Insertar stock para el producto 18
-insert into stock(prod_id, sucursal_id, stock)
-values (18, 1, 25),
-       (18, 2, 10),
-       (18, 3, 15),
-       (18, 4, 5);
-
--- Insertar stock para el producto 19
-insert into stock(prod_id, sucursal_id, stock)
-values (19, 1, 22),
-       (19, 2, 12),
-       (19, 3, 10),
-       (19, 4, 6);
-
--- Insertar stock para el producto 20
-insert into stock(prod_id, sucursal_id, stock)
-values (20, 1, 8),
-       (20, 2, 4),
-       (20, 3, 6),
-       (20, 4, 2);
-
--- Insertar stock para el producto 21
-insert into stock(prod_id, sucursal_id, stock)
-values (21, 1, 14),
-       (21, 2, 7),
-       (21, 3, 10),
-       (21, 4, 3);
-
--- Insertar stock para el producto 22
-insert into stock(prod_id, sucursal_id, stock)
-values (22, 1, 35),
-       (22, 2, 20),
-       (22, 3, 15),
-       (22, 4, 8);
-
--- Insertar stock para el producto 23
-insert into stock(prod_id, sucursal_id, stock)
-values (23, 1, 12),
-       (23, 2, 5),
-       (23, 3, 8),
-       (23, 4, 3);
-
--- Insertar stock para el producto 24
-insert into stock(prod_id, sucursal_id, stock)
-values (24, 1, 10),
-       (24, 2, 4),
-       (24, 3, 7),
-       (24, 4, 2);
-
--- Insertar stock para el producto 25
-insert into stock(prod_id, sucursal_id, stock)
-values (25, 1, 40),
-       (25, 2, 25),
-       (25, 3, 15),
-       (25, 4, 10);
-
--- Insertar stock para el producto 26
-insert into stock(prod_id, sucursal_id, stock)
-values (26, 1, 8),
-       (26, 2, 3),
-       (26, 3, 6),
-       (26, 4, 2);
-
--- Insertar stock para el producto 27
-insert into stock(prod_id, sucursal_id, stock)
-values (27, 1, 55),
-       (27, 2, 35),
-       (27, 3, 20),
-       (27, 4, 10);
-
--- Insertar stock para el producto 28
-insert into stock(prod_id, sucursal_id, stock)
-values (28, 1, 12),
-       (28, 2, 6),
-       (28, 3, 9),
-       (28, 4, 4);
-
--- Insertar stock para el producto 29
-insert into stock(prod_id, sucursal_id, stock)
-values (29, 1, 30),
-       (29, 2, 18),
-       (29, 3, 12),
-       (29, 4, 6);
-
--- Insertar stock para el producto 30
-insert into stock(prod_id, sucursal_id, stock)
-values (30, 1, 22),
-       (30, 2, 15),
-       (30, 3, 10),
-       (30, 4, 5);
+values 
+(31, 1, 50), (31, 2, 40), (31, 3, 30), (31, 4, 20),
+(32, 1, 35), (32, 2, 25), (32, 3, 15), (32, 4, 5),
+(33, 1, 45), (33, 2, 35), (33, 3, 25), (33, 4, 15),
+(34, 1, 30), (34, 2, 20), (34, 3, 10), (34, 4, 5),
+(35, 1, 50), (35, 2, 40), (35, 3, 30), (35, 4, 20),
+(36, 1, 20), (36, 2, 15), (36, 3, 10), (36, 4, 5),
+(37, 1, 10), (37, 2, 8), (37, 3, 6), (37, 4, 4),
+(38, 1, 40), (38, 2, 30), (38, 3, 20), (38, 4, 10),
+(39, 1, 15), (39, 2, 12), (39, 3, 10), (39, 4, 8),
+(40, 1, 60), (40, 2, 50), (40, 3, 40), (40, 4, 30),
+(41, 1, 25), (41, 2, 20), (41, 3, 15), (41, 4, 10),
+(42, 1, 30), (42, 2, 25), (42, 3, 20), (42, 4, 15),
+(43, 1, 20), (43, 2, 15), (43, 3, 10), (43, 4, 5),
+(44, 1, 70), (44, 2, 60), (44, 3, 50), (44, 4, 40),
+(45, 1, 55), (45, 2, 45), (45, 3, 35), (45, 4, 25),
+(46, 1, 35), (46, 2, 25), (46, 3, 15), (46, 4, 5),
+(47, 1, 100), (47, 2, 90), (47, 3, 80), (47, 4, 70),
+(48, 1, 150), (48, 2, 140), (48, 3, 130), (48, 4, 120),
+(49, 1, 200), (49, 2, 180), (49, 3, 160), (49, 4, 140),
+(50, 1, 50), (50, 2, 40), (50, 3, 30), (50, 4, 20),
+(51, 1, 30), (51, 2, 25), (51, 3, 20), (51, 4, 15),
+(52, 1, 45), (52, 2, 35), (52, 3, 25), (52, 4, 15),
+(53, 1, 60), (53, 2, 50), (53, 3, 40), (53, 4, 30),
+(54, 1, 30), (54, 2, 20), (54, 3, 10), (54, 4, 5),
+(55, 1, 80), (55, 2, 70), (55, 3, 60), (55, 4, 50),
+(56, 1, 50), (56, 2, 40), (56, 3, 30), (56, 4, 20),
+(57, 1, 50), (57, 2, 40), (57, 3, 30), (57, 4, 20),
+(58, 1, 70), (58, 2, 60), (58, 3, 50), (58, 4, 40),
+(59, 1, 15), (59, 2, 12), (59, 3, 10), (59, 4, 8),
+(60, 1, 20), (60, 2, 15), (60, 3, 10), (60, 4, 5);
 
 
 -- Promociones
-
--- Insertar promociones
 insert into promociones(producto, preciop, iniciop, finalp)
-values (1, 2200, '2024-06-01', '2024-06-15'),
-       (2, 11500, '2024-06-01', '2024-06-10'),
-       (3, 700, '2024-06-05', '2024-06-20'),
-       (4, 8000, '2024-06-01', '2024-06-07'),
-       (8, 1300, '2024-06-01', '2024-06-08'),
-       (9, 12500, '2024-06-01', '2024-06-10'),
-       (10, 550, '2024-06-15', '2024-06-30'),
-       (13, 5000, '2024-06-05', '2024-06-15'),
-       (14, 3200, '2024-06-01', '2024-06-12'),
-       (16, 1800, '2024-06-01', '2024-06-08'),
-       (23, 10500, '2024-06-01', '2024-06-10'),
-       (24, 8000, '2024-06-01', '2024-06-15'),
-       (25, 600, '2024-06-10', '2024-06-25'),
-       (26, 8800, '2024-06-01', '2024-06-10'),
-       (27, 250, '2024-06-01', '2024-06-07'),
-       (30, 1200, '2024-06-05', '2024-06-15');
+values 
+(1, 2200, '2024-06-01', '2024-06-30'),
+(3, 8700, '2024-06-05', '2024-06-25'),
+(5, 4400, '2024-06-10', '2024-06-20'),
+(7, 19500, '2024-06-15', '2024-06-30'),
+(9, 15000, '2024-06-01', '2024-06-15'),
+(11, 10700, '2024-06-05', '2024-06-25'),
+(13, 13500, '2024-06-10', '2024-06-20'),
+(15, 6900, '2024-06-15', '2024-06-30'),
+(17, 5700, '2024-06-01', '2024-06-15'),
+(19, 540, '2024-06-05', '2024-06-25'),
+(21, 3200, '2024-06-10', '2024-06-20'),
+(23, 8000, '2024-06-15', '2024-06-30'),
+(25, 3600, '2024-06-01', '2024-06-15'),
+(27, 900, '2024-06-05', '2024-06-25'),
+(29, 9300, '2024-06-10', '2024-06-20'),
+(31, 350, '2024-06-15', '2024-06-30'),
+(33, 8900, '2024-06-01', '2024-06-15'),
+(35, 4300, '2024-06-05', '2024-06-25'),
+(37, 20000, '2024-06-10', '2024-06-20'),
+(39, 15800, '2024-06-15', '2024-06-30');
+
+

@@ -103,7 +103,7 @@ export const AddProducto = () => {
     try {
       await axios.post("http://localhost:3000/api/agregar", producto)
       console.log('Agregado con Exito')
-      navigate("/productos")
+      navigate("/administration")
 
     } catch (e) {
       if (e.response.status == 400) {
