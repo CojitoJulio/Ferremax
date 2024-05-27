@@ -2,14 +2,6 @@ DROP DATABASE ferremas_db;
 CREATE DATABASE ferremas_db;
 USE ferremas_db ;
 
-DROP USER if exists 'user1'@'localhost';
-CREATE USER 'user1'@'localhost' IDENTIFIED BY 'palomamami';
-GRANT ALL PRIVILEGES ON  ferremas_db  TO 'user1'@'localhost';
-GRANT SELECT ON ferremas_db.* to 'user1'@'localhost';
-GRANT INSERT ON ferremas_db.* to 'user1'@'localhost';
-FLUSH PRIVILEGES;
-ALTER USER 'user1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'palomamami';
-
 -- Usuarios
 
 create table tipo_usuario (
@@ -181,4 +173,16 @@ insert into usuarios(nombre, apellido, pass, correo, tipo_user)
 values ("Bruno", "Bevilaqcua", "perroChocolo123", "brunitoAlbo666@gmail.com", 1),
        ("Daniel", "Gutierrez", "CojoJulio123", "cojitojulio@gmail.com", 0),
        ("Michele", "Mouton", "MichelleQuattro51", "michelequattro@gmail.com", 1);
+       
+DROP USER if exists 'user1'@'localhost';
+CREATE USER 'user1'@'localhost' IDENTIFIED BY 'palomamami';
+GRANT ALL PRIVILEGES ON  ferremas_db  TO 'user1'@'localhost';
+GRANT SELECT ON ferremas_db.* to 'user1'@'localhost';
+GRANT INSERT ON ferremas_db.* to 'user1'@'localhost';
+GRANT UPDATE ON ferremas_db.productos to 'user1'@'localhost';
+GRANT DELETE ON ferremas_db.productos to 'user1'@'localhost';
+GRANT DELETE ON ferremas_db.stock to 'user1'@'localhost';
+FLUSH PRIVILEGES;
+ALTER USER 'user1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'palomamami';
+
 

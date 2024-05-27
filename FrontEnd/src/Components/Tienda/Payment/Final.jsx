@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { TRANSBANK_URL } from "../../../variables";
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -11,6 +12,8 @@ export const Final = () => {
     const query = useQuery();
     const token = query.get('token_ws');
 
+    const apiUrl = TRANSBANK_URL
+
     const usuario = {
         "user_id": 3,
         "nombre": "Michele",
@@ -21,7 +24,7 @@ export const Final = () => {
     useEffect(() => {
         const confirmPayment = async () => {
             try {
-                const response = await fetch('http://localhost:3000/transbank/commit', {
+                const response = await fetch(apiUrl + '/transbank/commit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ token })

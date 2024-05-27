@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
+import { API_URL } from '../../variables'
 
 export const GetStock = ({ producto }) => {
+
+    const apiUrl = API_URL
 
     const [stock, setStock] = useState([])
 
     const fetchData = async () => {
-        const response = await fetch('http://localhost:3000/api/stock/' + producto);
+        const response = await fetch(apiUrl + '/stock/' + producto);
         const stockdb = await response.json()
         setStock(stockdb);
     }

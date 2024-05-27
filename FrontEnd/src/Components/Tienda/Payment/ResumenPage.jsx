@@ -1,12 +1,16 @@
 import './../../../Styles/Payment.css'
 import { useContext, useEffect, useRef, useState } from "react"
 import { CartContext } from "../../../Contexts/CartProvider";
+import { FRONTEND_URL, TRANSBANK_URL } from '../../../variables';
 
 export const ResumenPage = () => {
 
     const [cart, setCart] = useContext(CartContext)
     const [suma, setSuma] = useState(0)
     const [datos, setDatos] = useState({})
+
+    const apiUrl = TRANSBANK_URL
+    const frontUrl = FRONTEND_URL
 
     const paybutton = useRef(null)
     const fakepaybutton = useRef(null)
@@ -19,10 +23,10 @@ export const ResumenPage = () => {
         console.log(sessionId)
         console.log(buyOrder)
         console.log(suma)
-        const response = await fetch('http://localhost:3000/transbank/create', {
+        const response = await fetch(apiUrl + '/transbank/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: suma, sessionId, buyOrder, returnUrl: 'http://localhost:5173/store/final' })
+            body: JSON.stringify({ amount: suma, sessionId, buyOrder, returnUrl: frontUrl +'/store/final' })
         });
 
         const data = await response.json();

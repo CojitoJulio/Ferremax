@@ -9,7 +9,7 @@ routes.get('/', (req, res) => {
         if (err) return res.send(err)
 
         conn.query(
-            `SELECT p.codigo, sc.subcat, p.marca, p.nombre, p.precio, COALESCE(pr.preciop, 0) AS precio_promocion, sc.imagen
+            `SELECT p.codigo, sc.subcat, p.marca, p.nombre, p.precio, COALESCE(pr.preciop, 0) AS precio_promocion, sc.imagen, sc.subcat_id
             FROM productos as p 
             join subcat as sc on p.subcat = sc.subcat_id
             left join promociones as pr on pr.producto = p.codigo
@@ -168,25 +168,26 @@ routes.put('/mod', (req, res) => {
 
 routes.delete('/delete', (req, res) => {
     req.getConnection((err, conn) => {
-        if (err) return res.send(err)
+        if (err) return res.status(500).send(err); // Manejar errores de conexión
 
         conn.query(
             `DELETE from stock 
-        where prod_id = ?;`, [req.body.codigo], (err, rows) => {
-            if (err) return res.send(err);
+            WHERE prod_id = ?;`, [req.body.codigo],
+            (err, stockDeleteResult) => {
+                if (err) return res.status(500).send(err); // Manejar errores de consulta
 
-            res.send('Stock Deleteado')
-        }
-        )
+                conn.query(
+                    `DELETE FROM productos WHERE codigo = ?;`, [req.body.codigo],
+                    (err, productDeleteResult) => {
+                        if (err) return res.status(500).send(err); // Manejar errores de consulta
 
+                        res.status(200).send('Stock y producto eliminados con éxito');
+                    }
+                );
+            }
+        );
+    });
+});
 
-        conn.query(
-            `DELETE FROM productos WHERE codigo= ? ;`, [req.body.codigo], (err, rows) => {
-                if (err) return res.send(err);
-
-                res.send('Deleteado')
-            })
-    })
-})
 
 module.exports = routes

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
 import { fetchCate, fetchProd, fetchSucu } from '../../Servicios/ServiciosAPI'
+import { API_URL } from '../../variables'
 
 export const AddProducto = () => {
 
@@ -12,6 +13,7 @@ export const AddProducto = () => {
   const [errors, setErrors] = useState({});
   const [errorID, setErrorID] = useState('');
   const navigate = useNavigate();
+  const apiUrl = API_URL
 
   const [datosForm, setDatosForm] = useState({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0, stock: [] })
 
@@ -101,7 +103,7 @@ export const AddProducto = () => {
   const postear = async (producto) => {
 
     try {
-      await axios.post("http://localhost:3000/api/agregar", producto)
+      await axios.post(apiUrl + '/agregar', producto)
       console.log('Agregado con Exito')
       navigate("/administration")
 

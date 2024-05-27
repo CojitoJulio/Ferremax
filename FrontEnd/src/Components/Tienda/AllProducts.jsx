@@ -16,7 +16,6 @@ export const AllProducts = () => {
     }, [])
 
     return (
-
         <section className="allprods">
             <h1>Todos los Productos</h1>
             <div className="ofertones">
@@ -27,7 +26,5 @@ export const AllProducts = () => {
 
             </div>
         </section>
-
-
     )
 }
