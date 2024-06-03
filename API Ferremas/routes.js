@@ -1,193 +1,247 @@
 const express = require('express');
+const { Productos } = require('./models/productos');
+const { Stock } = require('./models/stock');
+const { sequelize } = require('./database/database');
+const { SubCat } = require('./models/subcat');
+const { Promociones } = require('./models/promociones');
+const { where } = require('sequelize');
+const { Sucursal } = require('./models/sucursal');
+const { Categorias } = require('./models/categorias');
+const { Usuarios } = require('./models/usuarios');
+const { Tipo_User } = require('./models/tipo_usuario');
 const routes = express.Router()
-
 
 // Get
 
-routes.get('/', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
+routes.get('/', async (req, res) => {
+    try {
+        const products = await Productos.findAll({
+            attributes: [
+                'codigo',
+                'marca',
+                'nombre',
+                'precio',
+                [sequelize.fn('COALESCE', sequelize.col('Promociones.preciop'), 0), 'precio_promocion']
 
-        conn.query(
-            `SELECT p.codigo, sc.subcat, p.marca, p.nombre, p.precio, COALESCE(pr.preciop, 0) AS precio_promocion, sc.imagen, sc.subcat_id
-            FROM productos as p 
-            join subcat as sc on p.subcat = sc.subcat_id
-            left join promociones as pr on pr.producto = p.codigo
-            order by p.nombre;`, (err, rows) => {
-            if (err) return res.send(err);
+            ],
+            include: [
+                {
+                    model: SubCat,
+                    attributes: ['subcat', 'imagen', 'subcat_id']
+                },
+                {
+                    model: Promociones,
+                    attributes: []
+                }
+            ],
+            order: [['nombre', 'ASC']]
 
-            res.json(rows)
         })
-    })
+        res.json(products)
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 })
 
-routes.get('/stock/:codigo', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
-        conn.query(
-            `select s.nombre, st.stock, p.nombre as producto
-            from stock as st
-            join sucursal as s on st.sucursal_id = s.sucursal_id
-            join productos as p on st.prod_id = p.codigo
-            where prod_id = ?;`, [req.params.codigo], (err, rows) => {
-            if (err) return res.send(err);
-
-            res.json(rows)
+routes.get('/stock/:codigo', async (req, res) => {
+    try {
+        const codigo = req.params.codigo;
+        const stockData = await Stock.findAll({
+            attributes: ['stock'],
+            include: [
+                {
+                    model: Sucursal,
+                    attributes: ['nombre']
+                },
+                {
+                    model: Productos,
+                    attributes: ['nombre']
+                }
+            ],
+            where: {
+                prod_id: codigo
+            }
         })
-    })
+
+        res.json(stockData)
+
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 })
 
-routes.get('/sucursales', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
-        conn.query(
-            `select * from sucursal`, (err, rows) => {
-                if (err) return res.send(err);
 
-                res.json(rows)
-            })
-    })
+routes.get('/sucursales', async (req, res) => {
+    try {
+        const stockData = await Sucursal.findAll()
+        res.json(stockData)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 })
 
-routes.get('/categorias', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
-        conn.query(
-            `select * from subcat;`, (err, rows) => {
-                if (err) return res.send(err);
-
-                res.json(rows)
-            })
-    })
+routes.get('/categorias', async (req, res) => {
+    try {
+        const stockData = await Categorias.findAll()
+        res.json(stockData)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 })
 
-routes.get('/usuarios', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
-        conn.query(
-            `select u.user_id, u.nombre, u.apellido, u.pass, u.correo, u.tipo_user, tp.nombre_tipo
-            from usuarios as u
-            join tipo_usuario as tp
-            on tp.id_tipo = u.tipo_user;`, (err, rows) => {
-            if (err) return res.send(err);
-
-            res.json(rows)
-        }
-        )
-    })
-})
-
-routes.get('/promos', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
-        conn.query(
-            `select p.promo_id, p.producto, pr.nombre,pr.precio, p.preciop, p.iniciop, p.finalp, sc.imagen, pr.marca
-            from promociones p
-            join productos pr on pr.codigo = p.producto
-            join subcat sc on pr.subcat = sc.subcat_id;`, (err, rows) => {
-            if (err) return res.send(err);
-
-            res.json(rows)
+routes.get('/usuarios', async (req, res) => {
+    try {
+        const stockData = await Usuarios.findAll({
+            attributes: ['user_id', 'nombre', 'apellido', 'pass', 'correo', 'tipo_user'],
+            include: [
+                {
+                    model: Tipo_User,
+                    attributes: ['nombre_tipo']
+                }
+            ]
         })
-    })
+        res.json(stockData)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 })
 
-routes.get('/producto/:codigo', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
-        conn.query(
-            `select p.codigo, p.marca, p.nombre, p.precio, sc.subcat
-            from productos as p
-            join subcat as sc on p.subcat = sc.subcat_id
-            where p.codigo = ?;`, [req.params.codigo], (err, rows) => {
-            if (err) return res.send(err);
-
-            res.json(rows)
+routes.get('/promos', async (req, res) => {
+    try {
+        const stockData = await Promociones.findAll({
+            attributes: ['promo_id', 'producto_id', 'preciop', 'iniciop', 'finalp'],
+            include: [
+                {
+                    model: Productos,
+                    attributes: ['nombre', 'marca'],
+                    include: [
+                        {
+                            model: SubCat,
+                            attributes: ['imagen']
+                        }
+                    ]
+                }
+            ]
         })
-    })
+        res.json(stockData)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+})
+
+routes.get('/producto/:codigo', async (req, res) => {
+
+    try {
+        const codigo = req.params.codigo
+
+        const products = await Productos.findAll({
+            attributes: [
+                'codigo',
+                'marca',
+                'nombre',
+                'precio',
+                [sequelize.fn('COALESCE', sequelize.col('Promociones.preciop'), 0), 'precio_promocion']
+
+            ],
+            include: [
+                {
+                    model: SubCat,
+                    attributes: ['subcat', 'subcat_id']
+                },
+                {
+                    model: Promociones,
+                    attributes: []
+                }
+            ],
+            where: {
+                codigo: codigo
+            }
+
+        })
+        res.json(products)
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 })
 
 // Post
 
-routes.post('/agregar', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
+routes.post('/agregar', async (req, res) => {
+    try {
+        const { codigo, nombre, marca, precio, subcat_id, stock } = req.body
 
-        conn.query(
-            `INSERT INTO productos(codigo, subcat, marca, nombre, precio)
-            values (?, ?, ?, ?, ?)`,
-            [req.body.codigo, req.body.subcat, req.body.marca,
-            req.body.nombre, req.body.precio], (err, rows) => {
-                if (err) {
+        const newProduct = await Productos.create({
+            codigo: codigo,
+            nombre: nombre,
+            marca: marca,
+            precio: precio,
+            subcat_id: subcat_id
+        })
 
-                    return res.status(400).json({
-                        message: 'Error al agregar el producto',
-                        error: err
-                    });
-                }
-
-                res.send('Producto Agregado')
-            }
-        )
-
-        var count = Object.keys(req.body.stock).length;
+        var count = Object.keys(stock).length;
 
         for (let i = 1; i <= count; i++) {
+            const newStock = await Stock.create({
+                stock: stock[i - 1],
+                prod_id: codigo,
+                sucursal_id: i
+            })
 
-            conn.query(
-                `INSERT INTO stock(prod_id, sucursal_id, stock)
-                values (?, ?, ?)`, [req.body.codigo, i, req.body.stock[i - 1], (err, rows) => {
-                if (err) return res.send(err)
-
-                res.send('Stock Ingresado')
-            }]
-            )
         }
-    })
+
+        res.send('Producto Agregado')
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+
 })
 
 // Update
 
-routes.put('/mod', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.send(err)
+routes.put('/mod', async (req, res) => {
+    try {
+        const { subcat_id, marca, nombre, precio, codigo } = req.body
 
-        conn.query(
-            `UPDATE productos
-            SET subcat= ?, marca= ?, nombre= ?, precio= ?
-            WHERE codigo = ?;`, [req.body.subcat, req.body.marca,
-        req.body.nombre, req.body.precio, req.body.codigo], (err, rows) => {
-            if (err) return res.send(err);
+        const prod = await Productos.findByPk(codigo)
+        prod.nombre = nombre
+        prod.marca = marca
+        prod.precio = precio
+        prod.subcat_id = subcat_id
 
-            res.json(rows)
-        })
-    })
+        await prod.save()
+
+        res.json(prod)
+
+        console.log(prod)
+        console.log('Modificado')
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 })
 
 // Delete
 
-routes.delete('/delete', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.status(500).send(err); // Manejar errores de conexión
+routes.delete('/delete', async (req, res) => {
+    try {
+        const { codigo } = req.body
 
-        conn.query(
-            `DELETE from stock 
-            WHERE prod_id = ?;`, [req.body.codigo],
-            (err, stockDeleteResult) => {
-                if (err) return res.status(500).send(err); // Manejar errores de consulta
-
-                conn.query(
-                    `DELETE FROM productos WHERE codigo = ?;`, [req.body.codigo],
-                    (err, productDeleteResult) => {
-                        if (err) return res.status(500).send(err); // Manejar errores de consulta
-
-                        res.status(200).send('Stock y producto eliminados con éxito');
-                    }
-                );
+        await Productos.destroy({
+            where: {
+                codigo
             }
-        );
-    });
-});
+        })
+
+        res.json('Se elimino')
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+})
 
 
 module.exports = routes
