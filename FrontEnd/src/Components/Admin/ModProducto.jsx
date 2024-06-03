@@ -2,89 +2,92 @@ import { useEffect, useState } from "react";
 import { fetchCate, fetchProd } from "../../Servicios/ServiciosAPI";
 import axios from "axios";
 import { API_URL } from "../../variables";
+import { useNavigate } from "react-router-dom";
 
 export const ModProducto = () => {
 
-    const [productos, setProductos] = useState([])
-    const [codigo, setCodigo] = useState([])
-    const [elejido, setElejido] = useState({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
-    const [categorias, setCategorias] = useState([])
-    const [errorID, setErrorID] = useState('');
-    const apiUrl = API_URL
+  const [productos, setProductos] = useState([])
+  const [codigo, setCodigo] = useState([])
+  const [elejido, setElejido] = useState({ codigo: 0, subcat: {}, marca: '', nombre: '', precio: 0 })
+  const [categorias, setCategorias] = useState([])
+  const [errorID, setErrorID] = useState('');
+  const apiUrl = API_URL
 
-    const handleChangeCod = (e) => {
-        const { value } = e.target;
-        setCodigo(value);
-    };
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setElejido((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
-    };
+  const handleChangeCod = (e) => {
+    const { value } = e.target;
+    setCodigo(value);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setElejido((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
 
-    const actualizar = async () => {
+  const actualizar = async () => {
 
-        const meromero = { codigo: elejido.codigo, subcat: elejido.subcat_id, marca: elejido.marca, nombre: elejido.nombre, precio: elejido.precio}
+    const meromero = { codigo: elejido.codigo, subcat: elejido.subcat_id, marca: elejido.marca, nombre: elejido.nombre, precio: elejido.precio }
 
-        try {
-            await axios.put(apiUrl+ "/mod", meromero)
-            console.log('Modificado con Exito')
-            navigate("/administration")
-      
-          } catch (e) {
-            if (e.response.status == 400) {
-              return
-            }
-          }
+    try {
+      await axios.put(apiUrl + "/mod", meromero)
+      console.log('Modificado con Exito')
+      navigate("/administration")
+
+    } catch (e) {
+      if (e.response.status == 400) {
+        return
+      }
+    }
+  }
+
+  const Clean = (e) => {
+    e.preventDefault()
+    setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
+    setCodigo(0)
+  }
+
+  const buscar = (e) => {
+    e.preventDefault();
+    setErrorID('');
+
+    const productoEncontrado = productos.find((prod) => prod.codigo == codigo);
+
+    if (!productoEncontrado || JSON.stringify(productoEncontrado) === JSON.stringify(elejido)) {
+      setErrorID('Este código no existe');
+      setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
+      setCodigo(0)
+      return;
     }
 
-    const Clean = (e) => {
-        e.preventDefault()
-        setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
-        setCodigo(0)
-    }
+    setElejido(productoEncontrado);
+    console.log(productoEncontrado);
 
-    const buscar = (e) => {
-        e.preventDefault();
-        setErrorID('');
-    
-        const productoEncontrado = productos.find((prod) => prod.codigo == codigo);
-    
-        if (!productoEncontrado || JSON.stringify(productoEncontrado) === JSON.stringify(elejido)) {
-            setErrorID('Este código no existe');
-            setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
-            setCodigo(0)
-            return;
-        }
-    
-        setElejido(productoEncontrado);
-        console.log(productoEncontrado);
-    
-    };
-    
+  };
 
-    useEffect(() => {
+
+  useEffect(() => {
     const fetchCateg = async () => {
-        const categoriasData = await fetchCate();
-        setCategorias(categoriasData)
-        }
+      const categoriasData = await fetchCate();
+      setCategorias(categoriasData)
+    }
 
     const fetchProds = async () => {
-        const productosData = await fetchProd();
-        setProductos(productosData)
+      const productosData = await fetchProd();
+      setProductos(productosData)
     }
 
     fetchProds();
     fetchCateg();
-    }, [])
+  }, [])
 
-    useEffect(()=> {
-        console.log(elejido)
-    }, [elejido])
+  useEffect(() => {
+    console.log(elejido)
+  }, [elejido])
 
 
   return (
@@ -96,7 +99,7 @@ export const ModProducto = () => {
           <tbody>
             <tr>
               <td>Codigo</td>
-              <td><input type="text" maxLength="9" name='codigo'  onChange={handleChangeCod} /></td>
+              <td><input type="text" maxLength="9" name='codigo' onChange={handleChangeCod} /></td>
             </tr>
           </tbody>
         </table>
@@ -107,7 +110,7 @@ export const ModProducto = () => {
         </div>
 
         <section id='errors'>
-            {errorID && <p>{errorID}</p>}
+          {errorID && <p>{errorID}</p>}
         </section>
 
         <table id='tableadd'>
@@ -123,7 +126,7 @@ export const ModProducto = () => {
             <tr>
               <td>Categoria</td>
               <td>
-                <select name="subcat_id" value={elejido.subcat_id} onChange={handleChange}>
+                <select name="subcat_id" value={elejido.subcat.subcat_id} onChange={handleChange}>
                   {categorias.map((cate) =>
                     <option key={cate.subcat_id} value={cate.subcat_id}>{cate.subcat}</option>)}
                 </select>
@@ -139,7 +142,7 @@ export const ModProducto = () => {
         <div id='botones'>
           <button onClick={actualizar}>Actualizar</button>
         </div>
-        
+
       </form>
     </div>
   )

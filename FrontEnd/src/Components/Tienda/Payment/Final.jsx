@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TRANSBANK_URL } from "../../../variables";
 
@@ -72,14 +72,14 @@ export const Final = () => {
 
                 <div className="datostarjeta">
                     <p>Tarjeta terminada en: {result.card_detail.card_number}</p>
-                    {result.payment_type_code === 'VN' ? <p>Venta Credito</p> : <p>Venta Debito</p>} 
+                    {result.payment_type_code === 'VN' ? <p>Venta Credito</p> : <p>Venta Debito</p>}
                 </div>
             </div>
             <div className="finalblock">
                 <div className="checkbox">
-                    {result.status === 'AUTHORIZED' ? 
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSm6tT1ZzmqNvZ0V3ya8YLWh8_GfKfyhsjjN9DjvCxRw&s" alt="" />
-                    : <img src="https://www.svgrepo.com/show/52314/unchecked.svg" alt="" />}
+                    {result.status === 'AUTHORIZED' ?
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSm6tT1ZzmqNvZ0V3ya8YLWh8_GfKfyhsjjN9DjvCxRw&s" alt="" />
+                        : <img src="https://www.svgrepo.com/show/52314/unchecked.svg" alt="" />}
                 </div>
                 <div className="auth">
                     <h3>transacción</h3>
@@ -90,7 +90,7 @@ export const Final = () => {
             <div className="finalblock">
                 <div className="ferreinfo">
                     {result.status == 'AUTHORIZED' ? <p>gracias por comprar en</p> : <p>no se realizaron cargos</p>}
-                    
+
                     <h1>Ferremas</h1>
                     <button><Link to="/">Volver a la tienda</Link></button>
                 </div>

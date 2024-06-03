@@ -25,3 +25,10 @@ export const fecthPromos = async () => {
     const promos = await response.json()
     return promos;
 }
+
+export const fetchDolar = async () => {
+    const response = await fetch(apiUrl + '/dolar');
+    const dolarsito = await response.json()
+    return dolarsito
+
+}

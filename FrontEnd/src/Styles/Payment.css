@@ -1,248 +1,250 @@
-.ResumenPage{
-    width: 1080px;
-    height: 600px;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    justify-content: space-between;
-    background-color: #f2f2f2;
+.ResumenPage {
+  width: 1080px;
+  height: 600px;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  justify-content: space-between;
+  background-color: #f2f2f2;
 }
 
-.paymentData{
-    width: auto;
-    height: auto;
-    background-color: #f2f2f2;
-    display: grid;
-    padding: 20px;
-    gap: 20px;
+.paymentData {
+  width: auto;
+  height: auto;
+  background-color: #f2f2f2;
+  display: grid;
+  padding: 20px;
+  gap: 20px;
 }
 
 .paymentData form {
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
 }
 
-.resumenItems{
-    width: auto;
-    height: auto;
-    padding: 20px;
+.resumenItems {
+  width: auto;
+  height: auto;
+  padding: 20px;
 }
 
 .blockname {
-    background-color: #fff;
-    height: 80px;
-    width: 100%;
-    display: flex;
+  background-color: #fff;
+  height: 80px;
+  width: 100%;
+  display: flex;
 }
 
 .blockname div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding-left: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 
 h3 {
-    margin: 0;
-    padding: 0;
-    letter-spacing: 2px;
-    font-size: 15px;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 2px;
+  font-size: 15px;
 }
 
 .blockname div input {
-    margin-top: 5px;
-    height: 25px;
-    width: 230px;
+  margin-top: 5px;
+  height: 25px;
+  width: 230px;
 }
 
 .block {
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
 }
 
-.blockpay{
-    width: 100%;
-    height: 220px;
-    background-color: #fff;
-    display: grid;
-    grid-template-columns: 45% 45%;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px 0;
+.blockpay {
+  width: 100%;
+  height: 220px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 45% 45%;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
 }
 
-.metodo{
-    background-color: #f2f2f2;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.metodo {
+  background-color: #f2f2f2;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .metodo img {
-    width: 180px;
+  width: 180px;
 }
 
-.metodo input[type="radio"]{
-    width: 20px;
-    height: 20px;
-    margin-right: 20px;
-    cursor: pointer;
+.metodo input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  cursor: pointer;
 }
 
-.mercado{
-    filter: brightness(90%);
+.mercado {
+  filter: brightness(90%);
 }
 
-
-.resumen-products{
-    margin: 0;
-    padding: 30px;
-    zoom: 70%;
-    border-bottom: 1px solid #f2f2f2;
+.resumen-products {
+  margin: 0;
+  padding: 30px;
+  zoom: 70%;
+  border-bottom: 1px solid #f2f2f2;
 }
 
-.blockitems h3{
-    padding-top: 10px;
-    padding-left: 20px;
-    font-size: 20px;
+.blockitems h3 {
+  padding-top: 10px;
+  padding-left: 20px;
+  font-size: 20px;
 }
 
-.itemsgeneral{
-    overflow-y: scroll;
-    max-height: 300px;
+.itemsgeneral {
+  overflow-y: scroll;
+  max-height: 300px;
 }
 
-.total-resumen{
-    padding: 20px;
+.total-resumen {
+  padding: 20px;
 }
 
-.total-resumen h3{
-    padding: 0;
+.total-resumen h3 {
+  padding: 0;
 }
 
-.total-resumen span{
-    font-size: 30px;
+.total-resumen span {
+  font-size: 30px;
 }
 
-.FinalPago{
-    width: 100%;
-    height: auto;
+.FinalPago {
+  width: 100%;
+  height: auto;
 }
 
 .FinalPago form {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .FinalPago form input {
-    width: 90%;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    background-color: #008236;
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
+  width: 90%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #008236;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-#fake{
-    filter: brightness(70%);
-    cursor: not-allowed;
+#fake {
+  filter: brightness(70%);
+  cursor: not-allowed;
+}
 
+.datocompa {
+  display: flex;
+  justify-content: center;
 }
 
 /* Final Resumen Pago */
 
-.FinalPage{
-    width: 100%;
-    height: 600px;
-    background-color: #f2f2f2;
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: 32% 32% 32%;
-    justify-content: center;
-    gap: 10px;
+.FinalPage {
+  width: 100%;
+  height: 600px;
+  background-color: #f2f2f2;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+  justify-content: center;
+  gap: 10px;
 }
 
-.finalblock{
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.finalblock {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.checkbox{
-    display: flex;
-    justify-content: center;
-    margin-top: 80px;
+.checkbox {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
 }
-.checkbox img{
-    width: 150px;
-}
-
-.auth{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+.checkbox img {
+  width: 150px;
 }
 
-.auth h1{
-    margin: 10px
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.datoscliente{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    border-top: 1px solid rgb(156, 156, 156);
+.auth h1 {
+  margin: 10px;
 }
 
-.datostarjeta{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.datoscliente {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  border-top: 1px solid rgb(156, 156, 156);
+}
+
+.datostarjeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #titulometodo {
-    border-top: 1px solid rgb(156, 156, 156);
-    padding-top: 10px;
+  border-top: 1px solid rgb(156, 156, 156);
+  padding-top: 10px;
 }
 
-
-.ferreinfo{
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
+.ferreinfo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
 }
 
-.ferreinfo h1{
-    margin: 0;
+.ferreinfo h1 {
+  margin: 0;
 }
 
-.ferreinfo button{
-    margin-top: 20px;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    transition: all 300ms;
+.ferreinfo button {
+  margin-top: 20px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms;
 }
 
 .ferreinfo button a {
-    color: black;
+  color: black;
 }
 
-.ferreinfo button:hover{
-    background-color: #dbdbdb;
+.ferreinfo button:hover {
+  background-color: #dbdbdb;
 }

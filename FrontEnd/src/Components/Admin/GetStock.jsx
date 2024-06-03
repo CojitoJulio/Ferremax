@@ -15,6 +15,7 @@ export const GetStock = ({ producto }) => {
 
     useEffect(() => {
         fetchData();
+        console.log(stock)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [producto])
 
@@ -25,8 +26,8 @@ export const GetStock = ({ producto }) => {
                 <tbody>
 
                     {stock.map((stocksito) =>
-                        <tr key={stocksito.nombre} id='sucursalestb'>
-                            <td className='stockfields'>{stocksito.nombre} </td>
+                        <tr key={stocksito} id='sucursalestb'>
+                            <td className='stockfields'>{stocksito.sucursale.nombre} </td>
                             <td className='number'>{stocksito.stock}</td>
                         </tr>
                     )}
