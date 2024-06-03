@@ -1,14 +1,13 @@
 ###
-POST http://localhost:3000/api/agregar HTTP/1.1
+POST http://localhost:3000/api/agregar2 HTTP/1.1
 Content-Type: application/json
 
 {
     "codigo": 10589234,
-    "subcat": 1,
+    "subcat_id": 1,
     "marca": "Brembo",
     "nombre": "Tornillo CRS Punta Fina 1P",
-    "precio": 2590,
-    "stock": [12, 0, 5, 38]
+    "precio": 2590
 }
 
 ###
