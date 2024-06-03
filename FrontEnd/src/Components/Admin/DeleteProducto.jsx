@@ -2,74 +2,78 @@ import { useEffect, useState } from "react";
 import { fetchProd } from "../../Servicios/ServiciosAPI";
 import axios from "axios";
 import { API_URL } from "../../variables";
+import { useNavigate } from "react-router-dom";
 
 export const DeleteProducto = () => {
 
-    const apiUrl = API_URL
+  const apiUrl = API_URL
 
-    const [productos, setProductos] = useState([])
-    const [codigo, setCodigo] = useState([])
-    const [elejido, setElejido] = useState({ codigo: 0,marca: '', nombre: ''})
-    const [errorID, setErrorID] = useState('');
+  const [productos, setProductos] = useState([])
+  const [codigo, setCodigo] = useState([])
+  const [elejido, setElejido] = useState({ codigo: 0, marca: '', nombre: '' })
+  const [errorID, setErrorID] = useState('');
 
-    const handleChangeCod = (e) => {
-        const { value } = e.target;
-        setCodigo(value);
-    };
+  const navigate = useNavigate();
 
-    const deletear = async () => {
-        try {
-          await axios.delete(apiUrl + '/delete', { data: { codigo: codigo } });
-          console.log('Eliminado con Éxito');
-          navigate("/administration");
-        } catch (error) {
-          if (error.response && error.response.status === 400) {
-            return; // No hagas nada especial si el servidor devuelve un error 400
-          }
-          // Maneja otros errores aquí si es necesario
-          console.error('Error al eliminar:', error);
-        }
-      };
-      
+  const handleChangeCod = (e) => {
+    const { value } = e.target;
+    setCodigo(value);
+  };
 
-    const Clean = (e) => {
-        e.preventDefault()
-        setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
-        setCodigo(0)
+  const deletear = async (e) => {
+    e.preventDefault()
+    try {
+      await axios.delete(apiUrl + '/delete', { data: { codigo: codigo } });
+      console.log('Eliminado con Éxito');
+      navigate("/administration");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        return; // No hagas nada especial si el servidor devuelve un error 400
+      }
+      // Maneja otros errores aquí si es necesario
+      console.error('Error al eliminar:', error);
+    }
+  };
+
+
+  const Clean = (e) => {
+    e.preventDefault()
+    setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
+    setCodigo(0)
+  }
+
+  const buscar = (e) => {
+    e.preventDefault();
+    setErrorID('');
+
+    const productoEncontrado = productos.find((prod) => prod.codigo == codigo);
+
+    if (!productoEncontrado || JSON.stringify(productoEncontrado) === JSON.stringify(elejido)) {
+      setErrorID('Este código no existe');
+      setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
+      setCodigo(0)
+      return;
     }
 
-    const buscar = (e) => {
-        e.preventDefault();
-        setErrorID('');
-    
-        const productoEncontrado = productos.find((prod) => prod.codigo == codigo);
-    
-        if (!productoEncontrado || JSON.stringify(productoEncontrado) === JSON.stringify(elejido)) {
-            setErrorID('Este código no existe');
-            setElejido({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0 })
-            setCodigo(0)
-            return;
-        }
-    
-        setElejido(productoEncontrado);
-        console.log(productoEncontrado);
-    
-    };
-    
+    setElejido(productoEncontrado);
+    console.log(productoEncontrado);
 
-    useEffect(() => {
+  };
+
+
+  useEffect(() => {
 
     const fetchProds = async () => {
-        const productosData = await fetchProd();
-        setProductos(productosData)
+      const productosData = await fetchProd();
+      setProductos(productosData)
     }
 
     fetchProds();
-    }, [])
+  }, [])
 
-    useEffect(()=> {
-        console.log(elejido)
-    }, [elejido])
+  useEffect(() => {
+    console.log(elejido)
+  }, [elejido])
 
 
   return (
@@ -92,7 +96,7 @@ export const DeleteProducto = () => {
         </div>
 
         <section id='errors'>
-            {errorID && <p>{errorID}</p>}
+          {errorID && <p>{errorID}</p>}
         </section>
 
         <h2>{elejido.marca} - {elejido.nombre}</h2>
@@ -100,7 +104,7 @@ export const DeleteProducto = () => {
         <div id='botones'>
           <button onClick={deletear}>Eliminar</button>
         </div>
-        
+
       </form>
     </div>
   )

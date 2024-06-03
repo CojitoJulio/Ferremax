@@ -4,7 +4,6 @@ const { Stock } = require('./models/stock');
 const { sequelize } = require('./database/database');
 const { SubCat } = require('./models/subcat');
 const { Promociones } = require('./models/promociones');
-const { where } = require('sequelize');
 const { Sucursal } = require('./models/sucursal');
 const { Categorias } = require('./models/categorias');
 const { Usuarios } = require('./models/usuarios');
@@ -84,7 +83,7 @@ routes.get('/sucursales', async (req, res) => {
 
 routes.get('/categorias', async (req, res) => {
     try {
-        const stockData = await Categorias.findAll()
+        const stockData = await SubCat.findAll()
         res.json(stockData)
     } catch (error) {
         return res.status(500).json({ message: error.message })
@@ -162,6 +161,24 @@ routes.get('/producto/:codigo', async (req, res) => {
         })
         res.json(products)
 
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+})
+
+routes.get('/dolar', async (req, res) => {
+    let currentDate = new Date().toJSON().slice(0, 10);
+    let serie = 'F073.TCO.PRE.Z.D'
+
+
+    try {
+        const response = await fetch(`https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?user=dani.gutierrezg@duocuc.cl&pass=Completo123&firstdate=${currentDate}&lastdate=${currentDate}&timeseries=${serie}&function=GetSeries`)
+        if (!response.ok) {
+            throw new Error('Error al obtener el dolarsito bb')
+        }
+        const dolarData = await response.json();
+
+        res.json(dolarData)
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }

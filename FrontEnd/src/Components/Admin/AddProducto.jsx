@@ -15,7 +15,8 @@ export const AddProducto = () => {
   const navigate = useNavigate();
   const apiUrl = API_URL
 
-  const [datosForm, setDatosForm] = useState({ codigo: 0, subcat: 0, marca: '', nombre: '', precio: 0, stock: [] })
+
+  const [datosForm, setDatosForm] = useState({ codigo: 0, subcat_id: 0, marca: '', nombre: '', precio: 0, stock: [] })
 
   // Validaciones
 
@@ -63,13 +64,14 @@ export const AddProducto = () => {
         marca: String(datosForm.marca),
         precio: Number(datosForm.precio)
       });
-
       console.log(parsedData)
+
 
       const stockes = AddStock()
 
       const UpdatedData = ({ ...datosForm, stock: stockes })
       if (!errorID) {
+
         postear(UpdatedData);
         setErrors({})
       }
@@ -105,7 +107,8 @@ export const AddProducto = () => {
     try {
       await axios.post(apiUrl + '/agregar', producto)
       console.log('Agregado con Exito')
-      navigate("/administration")
+      navigate('administration')
+
 
     } catch (e) {
       if (e.response.status == 400) {
@@ -158,7 +161,7 @@ export const AddProducto = () => {
             <tr>
               <td>Categoria</td>
               <td>
-                <select name="subcat" value={setDatosForm.subcat} onChange={handleChange}>
+                <select name="subcat_id" value={setDatosForm.subcat_id} onChange={handleChange}>
                   {categorias.map((cate) =>
                     <option key={cate.subcat_id} value={cate.subcat_id}>{cate.subcat}</option>)}
                 </select>
