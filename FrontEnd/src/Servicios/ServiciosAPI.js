@@ -30,5 +30,10 @@ export const fetchDolar = async () => {
     const response = await fetch(apiUrl + '/dolar');
     const dolarsito = await response.json()
     return dolarsito
+}
 
+export const fetchTransacciones = async () => {
+    const response = await fetch(apiUrl + '/transaccionesok');
+    const transaccionsitas = await response.json()
+    return transaccionsitas
 }

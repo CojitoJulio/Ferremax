@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TRANSBANK_URL } from "../../../variables";
+import { fetchTransacciones } from "../../../Servicios/ServiciosAPI";
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -9,19 +10,15 @@ const useQuery = () => {
 export const Final = () => {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [User, setUser] = useState(true);
     const query = useQuery();
     const token = query.get('token_ws');
 
     const apiUrl = TRANSBANK_URL
 
-    const usuario = {
-        "user_id": 3,
-        "nombre": "Michele",
-        "apellido": "Mouton",
-        "correo": "michelequattro@gmail.com"
-    };
 
     useEffect(() => {
+
         const confirmPayment = async () => {
             try {
                 const response = await fetch(apiUrl + '/transbank/commit', {
@@ -48,25 +45,44 @@ export const Final = () => {
         } else {
             setLoading(false);
         }
-    }, [token]); // Agregar 'token' como dependencia
+    }, [token]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const TransData = await fetchTransacciones()
+
+            TransData.map((trans) => {
+                if (trans.session_id == result.session_id) {
+                    setUser(trans)
+                }
+            })
+        }
+
+        if (result) {
+            fetchUserData();
+        }
+    }, [result]);
+
+
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loading">Cargando<div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>;
     }
 
     if (!result) {
-        return <div>No result found.</div>;
+        return <div className="loading">Se está demorando un poco<div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>;
     }
+
 
     return (
         <div className="FinalPage">
             <div className="finalblock">
                 <h1>Datos Cliente</h1>
                 <div className="datoscliente">
-                    <h2>{usuario.nombre}</h2>
-                    <h2>{usuario.apellido}</h2>
+                    <h2>{User.nombre}</h2>
+                    <h2>{User.apellido}</h2>
                 </div>
-                <p>{usuario.correo}</p>
+                <p>{User.correo}</p>
 
                 <h2 id="titulometodo">Metodo de Pago</h2>
 

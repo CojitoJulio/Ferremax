@@ -8,6 +8,7 @@ const { Sucursal } = require('./models/sucursal');
 const { Categorias } = require('./models/categorias');
 const { Usuarios } = require('./models/usuarios');
 const { Tipo_User } = require('./models/tipo_usuario');
+const { Transacciones } = require('./models/transacciones');
 const routes = express.Router()
 
 // Get
@@ -20,7 +21,7 @@ routes.get('/', async (req, res) => {
                 'marca',
                 'nombre',
                 'precio',
-                [sequelize.fn('COALESCE', sequelize.col('Promociones.preciop'), 0), 'precio_promocion']
+                [sequelize.literal('COALESCE(`Promociones`.`preciop`, 0)'), 'precio_promocion'],
 
             ],
             include: [
@@ -90,6 +91,15 @@ routes.get('/categorias', async (req, res) => {
     }
 })
 
+routes.get('/transaccionesok', async (req, res) => {
+    try {
+        const transaccionesData = await Transacciones.findAll()
+        res.json(transaccionesData)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+})
+
 routes.get('/usuarios', async (req, res) => {
     try {
         const stockData = await Usuarios.findAll({
@@ -141,8 +151,7 @@ routes.get('/producto/:codigo', async (req, res) => {
                 'marca',
                 'nombre',
                 'precio',
-                [sequelize.fn('COALESCE', sequelize.col('Promociones.preciop'), 0), 'precio_promocion']
-
+                [sequelize.literal('COALESCE(`Promociones`.`preciop`, 0)'), 'precio_promocion'],
             ],
             include: [
                 {
@@ -217,6 +226,29 @@ routes.post('/agregar', async (req, res) => {
 
 })
 
+routes.post('/transacciones', async (req, res) => {
+    try {
+        const { nombre, apellido, correo, telefono, direccion, numerocasa, transaccion, session_id } = req.body
+
+        const newTransaccion = await Transacciones.create({
+            nombre: nombre,
+            apellido: apellido,
+            correo: correo,
+            telefono: telefono,
+            direccion: direccion,
+            numerocasa: numerocasa,
+            transaccion: transaccion,
+            session_id: session_id
+        })
+
+        res.send('Transaccion Agregada')
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+
+})
+
 // Update
 
 routes.put('/mod', async (req, res) => {
@@ -234,6 +266,32 @@ routes.put('/mod', async (req, res) => {
         res.json(prod)
 
         console.log(prod)
+        console.log('Modificado')
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+})
+
+routes.put('/modtransacciones', async (req, res) => {
+    try {
+        const { nombre, apellido, correo, telefono, direccion, numerocasa, transaccion, session_id } = req.body
+
+        const trans = await Productos.findByPk(codigo)
+        trans.nombre = nombre
+        trans.apellido = apellido
+        trans.correo = correo
+        trans.telefono = telefono
+        trans.direccion = direccion
+        trans.numerocasa = numerocasa
+        trans.transaccion = transaccion
+        trans.session_id = session_id
+
+        await trans.save()
+
+        res.json(trans)
+
+        console.log(trans)
         console.log('Modificado')
 
     } catch (error) {

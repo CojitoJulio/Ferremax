@@ -1,4 +1,5 @@
 import './../../../Styles/Payment.css'
+import axios from 'axios'
 import { useContext, useEffect, useRef, useState } from "react"
 import { CartContext } from "../../../Contexts/CartProvider";
 import { FRONTEND_URL, TRANSBANK_URL } from '../../../variables';
@@ -11,16 +12,19 @@ export const ResumenPage = () => {
     const [datos, setDatos] = useState({})
     const [dolar, divisa, setDivisa] = useContext(DolarContext)
 
+    const [datosForm, setDatosForm] = useState({ nombre: '', apellido: '', correo: '', telefono: '', direccion: '', numerocasa: '', transaccion: '', session_id: '' })
+
     const apiUrl = TRANSBANK_URL
     const frontUrl = FRONTEND_URL
 
     const paybutton = useRef(null)
     const fakepaybutton = useRef(null)
 
-    const [sessionId] = useState('123456');
-    const [buyOrder] = useState(Math.random(1000000000, 9999999999).toString());
+    const [sessionId] = useState(Math.random(1000000, 9999999).toString());
+    const [buyOrder] = useState(Math.random(1000000, 9999999).toString());
 
     const handlePayment = async (e) => {
+
         e.preventDefault();
         console.log(sessionId)
         console.log(buyOrder)
@@ -35,9 +39,48 @@ export const ResumenPage = () => {
         if (data.url) {
             console.log(data)
             setDatos(data)
+
+            console.log(datosForm)
+            postear()
             fakepaybutton.current.hidden = true
             paybutton.current.hidden = false
             // window.location.href = data.url + '?token_ws=' + data.token;
+        }
+    }
+
+    useEffect(() => {
+        if (buyOrder && sessionId) {
+            setDatosForm((prev) => {
+                return ({
+                    ...prev,
+                    transaccion: buyOrder,
+                    session_id: sessionId
+                })
+            });
+        }
+    }, [buyOrder, sessionId])
+
+    // Control Formularios
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setDatosForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    // Agregar Transaccion
+
+    const postear = async () => {
+
+        try {
+            await axios.post(apiUrl + '/api/transacciones', datosForm)
+            console.log('Agregado con Exito')
+        } catch (e) {
+            if (e.response.status == 400) {
+                return
+            }
         }
     }
 
@@ -54,33 +97,33 @@ export const ResumenPage = () => {
                     <div className="blockname">
                         <div>
                             <h3>NOMBRE:</h3>
-                            <input type="text" name='Nombre' />
+                            <input type="text" name='nombre' value={setDatosForm.nombre} onChange={handleChange} />
                         </div>
                         <div>
                             <h3>APELLIDO:</h3>
-                            <input type="text" name='Apellido' />
+                            <input type="text" name='apellido' value={setDatosForm.apellido} onChange={handleChange} />
                         </div>
                     </div>
 
                     <div className="blockname">
                         <div>
                             <h3>CORREO:</h3>
-                            <input type="text" name='correo' placeholder='ejemplo@ejemplo.com' />
+                            <input type="text" name='correo' placeholder='ejemplo@ejemplo.com' value={setDatosForm.correo} onChange={handleChange} />
                         </div>
                         <div>
                             <h3>TELEFONO:</h3>
-                            <input type="text" name='telefono' placeholder='+569' />
+                            <input type="text" name='telefono' placeholder='+569' value={setDatosForm.telefono} onChange={handleChange} />
                         </div>
                     </div>
 
                     <div className="blockname">
                         <div>
                             <h3>DIRECCION:</h3>
-                            <input type="text" name='direccion' placeholder='Avenida Siempre Viva' />
+                            <input type="text" name='direccion' placeholder='Avenida Siempre Viva' value={setDatosForm.direccion} onChange={handleChange} />
                         </div>
                         <div>
                             <h3>NUMERO CASA:</h3>
-                            <input type="text" name='numerocasa' placeholder='2558' />
+                            <input type="text" name='numerocasa' placeholder='2558' value={setDatosForm.numerocasa} onChange={handleChange} />
                         </div>
                     </div>
 
